@@ -1,11 +1,9 @@
-import { axios } from 'axios';
+import axios from 'axios';
 
-const url = 'http://localhost:4000';
-
-export default function requestBackend(data) {
-  axios({
+export default async function requestBackend(data, url) {
+  let res = await axios.post(`http://localhost:4000${url}`, {
     method: 'post',
-    url,
     data: data,
   });
+  console.log(res);
 }
