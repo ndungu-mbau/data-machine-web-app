@@ -41,24 +41,6 @@ export default class Sidebar extends Component {
             style={{ height: '847px', overflow: 'hidden' }}
           >
             <ul className="k-menu__nav">
-              <li aria-haspopup="true" className="k-menu__item " href="/">
-                <a href="/" className="k-menu__link">
-                  <i className="k-menu__link-icon flaticon-home" />
-                  <span className="k-menu__link-text">Home</span>
-                </a>
-              </li>
-              <li aria-haspopup="true" className="k-menu__item " href="/settings">
-                <a href="/settings" className="k-menu__link">
-                  <i className="k-menu__link-icon flaticon2-gear" />
-                  <span className="k-menu__link-text">Settings</span>
-                </a>
-              </li>
-              <li aria-haspopup="true" className="k-menu__item " href="/access">
-                <a href="/access" className="k-menu__link">
-                  <i className="k-menu__link-icon flaticon-lock" />
-                  <span className="k-menu__link-text">Access control</span>
-                </a>
-              </li>
               <li className="k-menu__section">
                 <h4 className="k-menu__section-text">Projects</h4>
                 <i className="k-menu__section-icon flaticon-more-v2" />
@@ -72,22 +54,47 @@ export default class Sidebar extends Component {
                   <i className="k-menu__link-bullet k-menu__link-bullet--dot">
                     <span />
                   </i>
-                  <span className="k-menu__link-text">Example Survey</span>
+                  <span className="k-menu__link-text">Add Incoming patient</span>
                 </a>
               </li>
-              <li aria-haspopup="true" className="k-menu__item k-menu__item--active">
-                <a
-                  data-intro="You can use this button to create a new project"
-                  data-position="right"
-                  data-step={2}
-                  className="k-menu__link"
-                >
-                  <i className="k-menu__link-icon flaticon2-add-1" />
-                  <span className="k-menu__link-text">Add Project</span>
+              <li
+                aria-haspopup="true"
+                className="k-menu__item k-menu__item--active"
+                href="/projects/5cce8cc39a008b1ed5a09a9a"
+              >
+                <a href="/projects/5cce8cc39a008b1ed5a09a9a" className="k-menu__link">
+                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
+                    <span />
+                  </i>
+                  <span className="k-menu__link-text">Process Existing patient</span>
+                </a>
+              </li>
+              <li
+                aria-haspopup="true"
+                className="k-menu__item k-menu__item--active"
+                href="/projects/5cce8cc39a008b1ed5a09a9a"
+              >
+                <a href="/projects/5cce8cc39a008b1ed5a09a9a" className="k-menu__link">
+                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
+                    <span />
+                  </i>
+                  <span className="k-menu__link-text">Report Complaint</span>
+                </a>
+              </li>
+              <li
+                aria-haspopup="true"
+                className="k-menu__item k-menu__item--active"
+                href="/projects/5cce8cc39a008b1ed5a09a9a"
+              >
+                <a href="/projects/5cce8cc39a008b1ed5a09a9a" className="k-menu__link">
+                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
+                    <span />
+                  </i>
+                  <span className="k-menu__link-text">Update Patient Kpi Details</span>
                 </a>
               </li>
               <li className="k-menu__section">
-                <h4 className="k-menu__section-text">Teams</h4>
+                <h4 className="k-menu__section-text">Reports</h4>
                 <i className="k-menu__section-icon flaticon-more-v2" />
               </li>
               <li
@@ -99,18 +106,19 @@ export default class Sidebar extends Component {
                   <i className="k-menu__link-bullet k-menu__link-bullet--dot">
                     <span />
                   </i>
-                  <span className="k-menu__link-text">Sample team</span>
+                  <span className="k-menu__link-text">Comleted patients</span>
                 </a>
               </li>
-              <li aria-haspopup="true" className="k-menu__item k-menu__item--active">
-                <a
-                  data-intro="You can use this button to create a new team"
-                  data-position="right"
-                  data-step={4}
-                  className="k-menu__link"
-                >
-                  <i className="k-menu__link-icon flaticon2-add-1" />
-                  <span className="k-menu__link-text">Add Team</span>
+              <li
+                aria-haspopup="true"
+                className="k-menu__item "
+                href="/teams/5cce8cc39a008b35aba09a99"
+              >
+                <a href="/teams/5cce8cc39a008b35aba09a99" className="k-menu__link">
+                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
+                    <span />
+                  </i>
+                  <span className="k-menu__link-text">Pending patients</span>
                 </a>
               </li>
             </ul>
