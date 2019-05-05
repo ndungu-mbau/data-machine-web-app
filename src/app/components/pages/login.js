@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import requestBackend from './../../requestToolbox';
 
