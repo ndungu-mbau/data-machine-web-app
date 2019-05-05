@@ -1,25 +1,25 @@
 // Class definition
-var LayoutBuilder = function() {
-
+var LayoutBuilder = (function() {
   var exporter = {
-    init: function() {
-    },
+    init: function() {},
     startLoad: function(options) {
-      $('#builder_export').
-          addClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light').
-          find('span').text('Exporting...').
-          closest('.k-form__actions').
-          find('.btn').
-          attr('disabled', true);
+      $('#builder_export')
+        .addClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light')
+        .find('span')
+        .text('Exporting...')
+        .closest('.k-form__actions')
+        .find('.btn')
+        .attr('disabled', true);
       toastr.info(options.title, options.message);
     },
     doneLoad: function() {
-      $('#builder_export').
-          removeClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light').
-          find('span').text('Export').
-          closest('.k-form__actions').
-          find('.btn').
-          attr('disabled', false);
+      $('#builder_export')
+        .removeClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light')
+        .find('span')
+        .text('Export')
+        .closest('.k-form__actions')
+        .find('.btn')
+        .attr('disabled', false);
     },
     exportHtml: function(demo) {
       exporter.startLoad({
@@ -55,15 +55,18 @@ var LayoutBuilder = function() {
             // export status 1 is completed
             if (result.export_status !== 1) return;
 
-            $('<iframe/>').attr({
-              src: 'index.php?builder_export&builder_download&id=' + result.id,
-              style: 'visibility:hidden;display:none',
-            }).ready(function() {
-              toastr.success('Export HTML Version Layout', 'HTML version exported.');
-              exporter.doneLoad();
-              // stop the timer
-              clearInterval(timer);
-            }).appendTo('body');
+            $('<iframe/>')
+              .attr({
+                src: 'index.php?builder_export&builder_download&id=' + result.id,
+                style: 'visibility:hidden;display:none',
+              })
+              .ready(function() {
+                toastr.success('Export HTML Version Layout', 'HTML version exported.');
+                exporter.doneLoad();
+                // stop the timer
+                clearInterval(timer);
+              })
+              .appendTo('body');
           });
         }, 15000);
       });
@@ -102,15 +105,21 @@ var LayoutBuilder = function() {
             // export status 1 is completed
             if (result.export_status !== 1) return;
 
-            $('<iframe/>').attr({
-              src: 'index.php?builder_export&builder_download&id=' + result.id,
-              style: 'visibility:hidden;display:none',
-            }).ready(function() {
-              toastr.success('Export Default Version', 'Default HTML version exported with current configured layout.');
-              exporter.doneLoad();
-              // stop the timer
-              clearInterval(timer);
-            }).appendTo('body');
+            $('<iframe/>')
+              .attr({
+                src: 'index.php?builder_export&builder_download&id=' + result.id,
+                style: 'visibility:hidden;display:none',
+              })
+              .ready(function() {
+                toastr.success(
+                  'Export Default Version',
+                  'Default HTML version exported with current configured layout.',
+                );
+                exporter.doneLoad();
+                // stop the timer
+                clearInterval(timer);
+              })
+              .appendTo('body');
           });
         }, 15000);
       });
@@ -156,15 +165,21 @@ var LayoutBuilder = function() {
               // export status 1 is completed
               if (result.export_status !== 1) return;
 
-              $('<iframe/>').attr({
-                src: 'index.php?builder_export&builder_download&id=' +result.id,
-                style: 'visibility:hidden;display:none',
-              }).ready(function() {
-                toastr.success('Export Angular Version', 'Angular App version exported with current configured layout.');
-                exporter.doneLoad();
-                // stop the timer
-                clearInterval(timer);
-              }).appendTo(_self);
+              $('<iframe/>')
+                .attr({
+                  src: 'index.php?builder_export&builder_download&id=' + result.id,
+                  style: 'visibility:hidden;display:none',
+                })
+                .ready(function() {
+                  toastr.success(
+                    'Export Angular Version',
+                    'Angular App version exported with current configured layout.',
+                  );
+                  exporter.doneLoad();
+                  // stop the timer
+                  clearInterval(timer);
+                })
+                .appendTo(_self);
             });
           }, 15000);
         });
@@ -184,22 +199,27 @@ var LayoutBuilder = function() {
     $('[name="builder_submit"]').click(function(e) {
       e.preventDefault();
       var _self = $(this);
-      $(_self).
-          addClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light').
-          closest('.k-form__actions').
-          find('.btn').
-          attr('disabled', true);
+      $(_self)
+        .addClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light')
+        .closest('.k-form__actions')
+        .find('.btn')
+        .attr('disabled', true);
 
       $.ajax('index.php?demo=' + $(_self).data('demo'), {
         method: 'POST',
         data: $('[name]').serialize(),
-      }).done(function(r) {
-        toastr.success('Preview updated', 'Preview has been updated with current configured layout.');
-      }).always(function() {
-        setTimeout(function() {
-          location.reload();
-        }, 600);
-      });
+      })
+        .done(function(r) {
+          toastr.success(
+            'Preview updated',
+            'Preview has been updated with current configured layout.',
+          );
+        })
+        .always(function() {
+          setTimeout(function() {
+            location.reload();
+          }, 600);
+        });
     });
   };
 
@@ -207,11 +227,11 @@ var LayoutBuilder = function() {
     $('[name="builder_reset"]').click(function(e) {
       e.preventDefault();
       var _self = $(this);
-      $(_self).
-          addClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light').
-          closest('.k-form__actions').
-          find('.btn').
-          attr('disabled', true);
+      $(_self)
+        .addClass('k-spinner k-spinner--right k-spinner--sm k-spinner--light')
+        .closest('.k-form__actions')
+        .find('.btn')
+        .attr('disabled', true);
 
       $.ajax('index.php?demo=' + $(_self).data('demo'), {
         method: 'POST',
@@ -219,43 +239,46 @@ var LayoutBuilder = function() {
           builder_reset: 1,
           demo: $(_self).data('demo'),
         },
-      }).done(function(r) {
-      }).always(function() {
-        location.reload();
-      });
+      })
+        .done(function(r) {})
+        .always(function() {
+          location.reload();
+        });
     });
   };
 
   var keepActiveTab = function() {
-    $('[href^="#k_builder_"]').click(function(e) {
-      var which = $(this).attr('href');
-      var btn = $('[name="builder_submit"]');
-      var tab = $('[name="builder[tab]"]');
-      if ($(tab).length === 0) {
-        $('<input/>').
-            attr('type', 'hidden').
-            attr('name', 'builder[tab]').
-            val(which).
-            insertBefore(btn);
-      } else {
-        $(tab).val(which);
-      }
-    }).each(function() {
-      if ($(this).hasClass('active')) {
+    $('[href^="#k_builder_"]')
+      .click(function(e) {
         var which = $(this).attr('href');
         var btn = $('[name="builder_submit"]');
         var tab = $('[name="builder[tab]"]');
         if ($(tab).length === 0) {
-          $('<input/>').
-              attr('type', 'hidden').
-              attr('name', 'builder[tab]').
-              val(which).
-              insertBefore(btn);
+          $('<input/>')
+            .attr('type', 'hidden')
+            .attr('name', 'builder[tab]')
+            .val(which)
+            .insertBefore(btn);
         } else {
           $(tab).val(which);
         }
-      }
-    });
+      })
+      .each(function() {
+        if ($(this).hasClass('active')) {
+          var which = $(this).attr('href');
+          var btn = $('[name="builder_submit"]');
+          var tab = $('[name="builder[tab]"]');
+          if ($(tab).length === 0) {
+            $('<input/>')
+              .attr('type', 'hidden')
+              .attr('name', 'builder[tab]')
+              .val(which)
+              .insertBefore(btn);
+          } else {
+            $(tab).val(which);
+          }
+        }
+      });
   };
 
   var verify = {
@@ -267,31 +290,34 @@ var LayoutBuilder = function() {
         },
       }).fail(function() {
         grecaptcha.reset();
-        $('#alert-message').
-            removeClass('alert-success k-hide').
-            addClass('alert-danger').
-            html('Invalid reCaptcha validation');
+        $('#alert-message')
+          .removeClass('alert-success k-hide')
+          .addClass('alert-danger')
+          .html('Invalid reCaptcha validation');
       });
     },
     init: function() {
       var exportReadyTrigger;
       // click event
-      $('#builder_export').closest('.dropdown').find('.dropdown-item').click(function(e) {
-        e.preventDefault();
-        exportReadyTrigger = $(this);
+      $('#builder_export')
+        .closest('.dropdown')
+        .find('.dropdown-item')
+        .click(function(e) {
+          e.preventDefault();
+          exportReadyTrigger = $(this);
 
-        $('#k-modal-purchase').modal('show');
-        $('#alert-message').addClass('k-hide');
-        grecaptcha.reset();
-      });
+          $('#k-modal-purchase').modal('show');
+          $('#alert-message').addClass('k-hide');
+          grecaptcha.reset();
+        });
 
       $('#submit-verify').click(function(e) {
         e.preventDefault();
         if (!$('#g-recaptcha-response').val()) {
-          $('#alert-message').
-              removeClass('alert-success k-hide').
-              addClass('alert-danger').
-              html('Invalid reCaptcha validation');
+          $('#alert-message')
+            .removeClass('alert-success k-hide')
+            .addClass('alert-danger')
+            .html('Invalid reCaptcha validation');
           return;
         }
 
@@ -310,10 +336,10 @@ var LayoutBuilder = function() {
             }
           } else {
             grecaptcha.reset();
-            $('#alert-message').
-                removeClass('alert-success k-hide').
-                addClass('alert-danger').
-                html('Invalid reCaptcha validation');
+            $('#alert-message')
+              .removeClass('alert-success k-hide')
+              .addClass('alert-danger')
+              .html('Invalid reCaptcha validation');
           }
         });
       });
@@ -335,7 +361,7 @@ var LayoutBuilder = function() {
       init();
     },
   };
-}();
+})();
 
 jQuery(document).ready(function() {
   LayoutBuilder.init();

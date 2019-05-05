@@ -33,6 +33,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.13.0",
     "husky": "^2.2.0",
     "lint-staged": "^8.1.6",
@@ -45,6 +46,9 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": ["eslint", "pretty-quick — staged", "git add"]
+    "src/**/*.{js,jsx}": [
+      "eslint",
+      "git add"
+    ]
   }
 }
