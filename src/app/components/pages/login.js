@@ -1,7 +1,29 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import requestBackend from './../../requestToolbox';
 
 export default class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      password: '',
+      email: '',
+    };
+  }
+
+  handleChange(event) {
+    console.log('typing..');
+    this.setState({ password: event.target.value });
+    console.log(this.state.password);
+  }
+  passChange(event) {
+    console.log('typing..');
+    this.setState({ password: event.target.value });
+    console.log(this.state.password);
+  }
+  authUser() {
+    //this.setState({ email: event.target.value });
+  }
   render() {
     return (
       <>
@@ -46,6 +68,8 @@ export default class Login extends Component {
                           id="input-mail"
                           placeholder="ie. username@domain.com"
                           className="form-control"
+                          onChange={this.handleChange.bind(this)}
+                          value={this.state.email}
                         />
                       </div>
                       <div className="invalid-feedback">Please enter a valid email</div>
@@ -54,7 +78,9 @@ export default class Login extends Component {
                     <div className="form-group mb-4">
                       <div className="d-flex align-items-center justify-content-between">
                         <div>
-                          <label className="form-control-label">Password</label>
+                          <label className="form-control-label" value={this.state.password}>
+                            Password
+                          </label>
                         </div>
                         <div className="mb-2">
                           <a
@@ -79,6 +105,8 @@ export default class Login extends Component {
                             id="input-password"
                             placeholder="Password"
                             className="form-control"
+                            onChange={this.passChange.bind(this)}
+                            value={this.state.password}
                           />
                           <div className="input-group-append" style={{ cursor: 'pointer' }}>
                             <span className="input-group-text">
@@ -91,7 +119,11 @@ export default class Login extends Component {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <button type="submit" className="btn btn-block btn-primary">
+                      <button
+                        type="submit"
+                        onClick={e => this.authUser(e)}
+                        className="btn btn-block btn-primary"
+                      >
                         {' '}
                         Sign in
                       </button>
