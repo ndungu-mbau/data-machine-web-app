@@ -1,3 +1,3 @@
 window.lang = {
-    greeting : "Hello"
+  greeting: 'Hello',
 };
