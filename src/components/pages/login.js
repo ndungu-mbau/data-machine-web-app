@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 export default class Login extends Component {
   render() {
@@ -77,11 +76,10 @@ export default class Login extends Component {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <Link to="/">
-                      <button type="submit" className="btn btn-block btn-primary">
-                        Sign in
-                      </button>
-                    </Link>
+                    <button type="submit" className="btn btn-block btn-primary">
+                      {' '}
+                      Sign in
+                    </button>
                   </div>
                   <div className="mt-4 text-center">
                     <small>Not registered?</small>
