@@ -7,22 +7,20 @@ export default class Login extends Component {
     super();
     this.state = {
       password: '',
-      email: '',
+      phone: '',
     };
   }
 
   handleChange(event) {
-    console.log('typing..');
-    this.setState({ password: event.target.value });
-    console.log(this.state.password);
+    this.setState({ phone: event.target.value.trim() });
   }
   passChange(event) {
-    console.log('typing..');
-    this.setState({ password: event.target.value });
-    console.log(this.state.password);
+    this.setState({ password: event.target.value.trim() });
   }
-  authUser() {
-    //this.setState({ email: event.target.value });
+  authUser(event) {
+    console.log(this.state.phone);
+    event.preventDefault();
+    requestBackend({ ...this.state }, '/auth/login');
   }
   render() {
     return (
@@ -53,7 +51,7 @@ export default class Login extends Component {
                   <form noValidate className="needs-validation">
                     <div className="form-group">
                       <label htmlFor="input-mail" className="form-control-label">
-                        Email address
+                        phone
                       </label>
                       <div className="input-group input-group-merge">
                         <div className="input-group-prepend">
@@ -64,12 +62,12 @@ export default class Login extends Component {
                         <input
                           data-error="Please enter a valid email"
                           required
-                          type="email"
+                          type="number"
                           id="input-mail"
-                          placeholder="ie. username@domain.com"
+                          placeholder="ie. 131 2323 232"
                           className="form-control"
-                          onChange={this.handleChange.bind(this)}
-                          value={this.state.email}
+                          onInput={this.handleChange.bind(this)}
+                          value={this.state.phone}
                         />
                       </div>
                       <div className="invalid-feedback">Please enter a valid email</div>
@@ -78,9 +76,7 @@ export default class Login extends Component {
                     <div className="form-group mb-4">
                       <div className="d-flex align-items-center justify-content-between">
                         <div>
-                          <label className="form-control-label" value={this.state.password}>
-                            Password
-                          </label>
+                          <label className="form-control-label">Password</label>
                         </div>
                         <div className="mb-2">
                           <a
@@ -105,7 +101,7 @@ export default class Login extends Component {
                             id="input-password"
                             placeholder="Password"
                             className="form-control"
-                            onChange={this.passChange.bind(this)}
+                            onInput={this.passChange.bind(this)}
                             value={this.state.password}
                           />
                           <div className="input-group-append" style={{ cursor: 'pointer' }}>
