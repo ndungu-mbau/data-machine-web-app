@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import requestBackend from './../../requestToolbox';
 
@@ -18,9 +19,12 @@ export default class Login extends Component {
     this.setState({ password: event.target.value.trim() });
   }
   authUser(event) {
-    console.log(this.state.phone);
     event.preventDefault();
-    requestBackend({ ...this.state }, '/auth/login');
+    var response = requestBackend({ ...this.state }, '/auth/login');
+    response.then(x => {
+      window.localStorage.setItem('user', x);
+      return this.props.history.push('/');
+    });
   }
   render() {
     return (
