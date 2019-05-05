@@ -82,14 +82,6 @@ export default class Login extends Component {
                             Password
                           </label>
                         </div>
-                        <div className="mb-2">
-                          <a
-                            href="/recover/send"
-                            className="small text-muted text-underline--dashed border-primary"
-                          >
-                            Lost password?
-                          </a>
-                        </div>
                       </div>
                       <div className="input-group input-group-merge">
                         <div className="input-group input-group-merge">
@@ -127,13 +119,6 @@ export default class Login extends Component {
                         {' '}
                         Sign in
                       </button>
-                    </div>
-                    <div className="mt-4 text-center">
-                      <small>Not registered?</small>
-                      <a href="/register" className="small font-weight-bold">
-                        {' '}
-                        Create account
-                      </a>
                     </div>
                   </form>
                 </div>
