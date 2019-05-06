@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 
 export default class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    if (!localStorage.getItem('user')) {
+      window.location = '/login';
+    }
+
+    this.state = {
+      userInfo: JSON.parse(localStorage.getItem('user')),
+    };
+  }
   render() {
     return (
       <div id="k_header" className="k-header k-grid__item k-header--fixed">
@@ -28,7 +39,9 @@ export default class Header extends Component {
             >
               <div className="k-header__topbar-user">
                 <span className="k-header__topbar-welcome k-hidden-mobile">Hi,</span>
-                <span className="k-header__topbar-username k-hidden-mobile">Barney</span>
+                <span className="k-header__topbar-username k-hidden-mobile">
+                  {this.state.userInfo.firstName}
+                </span>
                 <img alt="Pic" src="/assets/media/users/user-avatar.jpg" />
                 <span className="k-badge k-badge--username k-badge--lg k-badge--brand k-hidden">
                   A
@@ -45,7 +58,7 @@ export default class Header extends Component {
                     <img alt="Pic" src="/assets/media/users/user-avatar.jpg" />
                   </div>
                   <div className="k-user-card__details">
-                    <div className="k-user-card__name">Barney</div>
+                    <div className="k-user-card__name">{this.state.userInfo.firstName}</div>
                   </div>
                 </div>
               </div>
@@ -62,6 +75,10 @@ export default class Header extends Component {
                   <button
                     target="_blank"
                     className="btn btn-outline-metal btn-hover-brand btn-upper btn-font-dark btn-sm btn-bold"
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location = '/login';
+                    }}
                   >
                     Sign Out
                   </button>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import requestBackend from './../../requestToolbox';
+import { requestBackend } from './../../requestToolbox';
+import toast from '../../services/toast';
 
 export default class Login extends Component {
   constructor() {
@@ -15,15 +16,27 @@ export default class Login extends Component {
     this.setState({ phone: event.target.value.trim() });
   }
   passChange(event) {
-    this.setState({ password: event.target.value.trim() });
+    this.setState({ password: event.target.value });
   }
-  authUser(event) {
+  async authUser(event) {
     event.preventDefault();
-    var response = requestBackend({ ...this.state }, '/auth/login');
-    response.then(x => {
-      window.localStorage.setItem('user', x);
+    try {
+      var response = await requestBackend({ ...this.state }, '/auth/login');
+      console.log(response.data);
+      window.localStorage.setItem(
+        'user',
+        JSON.stringify(
+          Object.assign({}, response.data, {
+            _id: undefined,
+            token: undefined,
+          }),
+        ),
+      );
+      window.localStorage.setItem('token', response.data.token);
       return this.props.history.push('/');
-    });
+    } catch (err) {
+      if (err.response.data) toast.error(err.response.data.message);
+    }
   }
   render() {
     return (
@@ -51,6 +64,16 @@ export default class Login extends Component {
                     <img src="./assets/media/logos/all-black.svg" alt="" />
                   </div>
                   <span className="clearfix" />
+                  {this.state.error ? (
+                    <div role="alert" className="alert alert-danger">
+                      <div className="alert-icon">
+                        <i className="flaticon-questions-circular-button" />
+                      </div>
+                      <div className="alert-text">{this.state.error}</div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                   <form noValidate className="needs-validation">
                     <div className="form-group">
                       <label htmlFor="input-mail" className="form-control-label">
@@ -69,7 +92,7 @@ export default class Login extends Component {
                           id="input-mail"
                           placeholder="ie. 131 2323 232"
                           className="form-control"
-                          onInput={this.handleChange.bind(this)}
+                          onChange={this.handleChange.bind(this)}
                           value={this.state.phone}
                         />
                       </div>
@@ -96,7 +119,7 @@ export default class Login extends Component {
                             id="input-password"
                             placeholder="Password"
                             className="form-control"
-                            onInput={this.passChange.bind(this)}
+                            onChange={this.passChange.bind(this)}
                             value={this.state.password}
                           />
                           <div className="input-group-append" style={{ cursor: 'pointer' }}>

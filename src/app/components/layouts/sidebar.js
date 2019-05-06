@@ -1,7 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
+import Data from '../../services/data';
 
-export default class Sidebar extends Component {
+import { withRouter, Link } from 'react-router-dom';
+
+class Sidebar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      missions: [],
+      firstName: JSON.parse(localStorage.getItem('user')),
+    };
+  }
+  async componentDidMount() {
+    var data = await Data.getMissions();
+
+    this.setState({ missions: data });
+  }
   render() {
     return (
       <div
@@ -15,9 +31,9 @@ export default class Sidebar extends Component {
           style={{}}
         >
           <div className="k-aside__brand-logo">
-            <a href="/">
+            <Link to="/">
               <img alt="Logo" src="/assets/media/logos/v3-white.svg" style={{ height: '40px' }} />
-            </a>
+            </Link>
           </div>
           <div className="k-aside__brand-tools">
             <button
@@ -45,82 +61,26 @@ export default class Sidebar extends Component {
                 <h4 className="k-menu__section-text">Projects</h4>
                 <i className="k-menu__section-icon flaticon-more-v2" />
               </li>
-              <li
-                aria-haspopup="true"
-                className="k-menu__item k-menu__item--active"
-                href="/projects/5cce8cc39a008b1ed5a09a9a"
-              >
-                <a href="/projects/5cce8cc39a008b1ed5a09a9a" className="k-menu__link">
-                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
-                    <span />
-                  </i>
-                  <span className="k-menu__link-text">Add Incoming patient</span>
-                </a>
-              </li>
-              <li
-                aria-haspopup="true"
-                className="k-menu__item k-menu__item--active"
-                href="/projects/5cce8cc39a008b1ed5a09a9a"
-              >
-                <a href="/projects/5cce8cc39a008b1ed5a09a9a" className="k-menu__link">
-                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
-                    <span />
-                  </i>
-                  <span className="k-menu__link-text">Process Existing patient</span>
-                </a>
-              </li>
-              <li
-                aria-haspopup="true"
-                className="k-menu__item k-menu__item--active"
-                href="/projects/5cce8cc39a008b1ed5a09a9a"
-              >
-                <a href="/projects/5cce8cc39a008b1ed5a09a9a" className="k-menu__link">
-                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
-                    <span />
-                  </i>
-                  <span className="k-menu__link-text">Report Complaint</span>
-                </a>
-              </li>
-              <li
-                aria-haspopup="true"
-                className="k-menu__item k-menu__item--active"
-                href="/projects/5cce8cc39a008b1ed5a09a9a"
-              >
-                <a href="/projects/5cce8cc39a008b1ed5a09a9a" className="k-menu__link">
-                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
-                    <span />
-                  </i>
-                  <span className="k-menu__link-text">Update Patient Kpi Details</span>
-                </a>
-              </li>
-              <li className="k-menu__section">
-                <h4 className="k-menu__section-text">Reports</h4>
-                <i className="k-menu__section-icon flaticon-more-v2" />
-              </li>
-              <li
-                aria-haspopup="true"
-                className="k-menu__item "
-                href="/teams/5cce8cc39a008b35aba09a99"
-              >
-                <a href="/teams/5cce8cc39a008b35aba09a99" className="k-menu__link">
-                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
-                    <span />
-                  </i>
-                  <span className="k-menu__link-text">Comleted patients</span>
-                </a>
-              </li>
-              <li
-                aria-haspopup="true"
-                className="k-menu__item "
-                href="/teams/5cce8cc39a008b35aba09a99"
-              >
-                <a href="/teams/5cce8cc39a008b35aba09a99" className="k-menu__link">
-                  <i className="k-menu__link-bullet k-menu__link-bullet--dot">
-                    <span />
-                  </i>
-                  <span className="k-menu__link-text">Pending patients</span>
-                </a>
-              </li>
+              {this.state.missions.map(mission => {
+                return (
+                  <li
+                    key={mission.questionnaire.id}
+                    aria-haspopup="true"
+                    className={`k-menu__item ${
+                      mission.questionnaire.id === this.props.match.params.id
+                        ? 'k-menu__item--active'
+                        : ''
+                    }`}
+                  >
+                    <Link to={`/project/${mission.questionnaire.id}`} className="k-menu__link">
+                      <i className="k-menu__link-bullet k-menu__link-bullet--dot">
+                        <span />
+                      </i>
+                      <span className="k-menu__link-text">{mission.name}</span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
             <div className="ps__rail-x" style={{ left: '0px', bottom: '0px' }}>
               <div className="ps__thumb-x" tabIndex={0} style={{ left: '0px', width: '0px' }} />
@@ -148,3 +108,7 @@ export default class Sidebar extends Component {
     );
   }
 }
+
+//Component
+
+export default withRouter(Sidebar);
