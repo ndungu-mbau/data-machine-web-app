@@ -98,6 +98,7 @@ var Data = (function() {
             questionnaire(id: $id) {
               id
               name
+              order,
               pages {
                 id
                 name

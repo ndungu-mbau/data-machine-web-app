@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import Sidebar from '../layouts/sidebar';
 import Header from '../layouts/header';
+import Decider from '../layouts/decider';
+import _ from 'underscore';
 
 import DOMPurify from 'dompurify';
 
@@ -24,13 +26,13 @@ export default class Home extends Component {
   }
   async componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      console.log('Route change!');
       var data = await Data.getMission(this.props.match.params.id);
 
       this.setState({ mission: data });
     }
   }
   render() {
+    console.log(this.state.mission);
     return (
       <div className="k-grid k-grid--hor k-grid--root">
         <div className="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page">
@@ -56,185 +58,37 @@ export default class Home extends Component {
               <div className="k-content__body k-grid__item k-grid__item--fluid">
                 {/* body content here */}
 
-                {this.state.mission.pages.map(page => {
-                  return page.groups.map(group => {
-                    return group.questions.map(question => {
-                      return (
-                        <div key={question.id} className="row container">
-                          <div className="col-lg-8">
-                            <div className="row">
-                              <pre>{JSON.stringify(question, null, '\t')}</pre>
-                              <br />
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    });
-                  });
-                })}
-
                 <div className="row container">
                   <div className="col-lg-8">
-                    <div className="row">
-                      <p>How did you learn about braiven datakit?</p>
-                      <br />
-                    </div>
+                    {this.state.mission.pages.map(page => {
+                      return _.sortBy(page.groups, 'name').map(group => {
+                        let questionsOrdered = [];
 
-                    <div className="row">
-                      <div className="k-radio-list">
-                        <label className="k-radio">
-                          <input name="know" type="radio" />I tool someone else's survey
-                          <span />
-                        </label>
-                        <label className="k-radio">
-                          <input name="know" type="radio" />
-                          Banner Advertisement
-                          <span />
-                        </label>
-                        <label className="k-radio">
-                          <input name="know" type="radio" />
-                          Search Engine
-                          <span />
-                        </label>
-                        <label className="k-radio">
-                          <input name="know" type="radio" />
-                          Referal link from another site
-                          <span />
-                        </label>
-                        <label className="k-radio">
-                          <input name="know" type="radio" />
-                          Magazine/Print Advertisement
-                          <span />
-                        </label>
-                        <label className="k-radio">
-                          <input name="know" type="radio" />
-                          Other Please specify
-                          <span />
-                        </label>
-                      </div>
-                    </div>
+                        if (this.state.mission.order) {
+                          group.questions.map(
+                            q => (questionsOrdered[this.state.mission.order.indexOf(q.id)] = q),
+                          );
+                        } else {
+                          questionsOrdered = _.sortBy(group.questions, 'position');
+                        }
 
-                    <br />
+                        // // filter to spread to get more natural positions and remove empty spaces
+                        const questionsCleaned = [...questionsOrdered.filter(q => q)];
 
-                    <div className="row">
-                      {/* ask here */}
-                      <input placeholder="Other" type="email" className="form-control" />
-                    </div>
+                        return questionsCleaned.map(question => {
+                          return (
+                            <span key={question.id}>
+                              <div className="row">
+                                <Decider question={{ question }} />
 
-                    <br />
-
-                    <div className="row">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: DOMPurify.sanitize(
-                            `<b>* Please provide us with some background information to help us design the app around your needs</b>`,
-                          ),
-                        }}
-                      />
-                    </div>
-                    <br />
-
-                    <div className="row">
-                      <table className="table">
-                        <thead>
-                          <tr>
-                            <td>Questions</td>
-                            <td>Very Important</td>
-                            <td>Important</td>
-                            <td>Not important</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Survey templates</td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Increased multi-lingual support</td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Multiple Users per Account</td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Graphical charts of response data</td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                            <td>
-                              <label className="k-radio">
-                                <input name="know" type="radio" />
-                                <span />
-                              </label>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <br />
-
+                                {/* <pre>{JSON.stringify(question, null, '\t')}</pre> */}
+                              </div>
+                              <br />
+                            </span>
+                          );
+                        });
+                      });
+                    })}
                     <div className="row">{/* ask here */}</div>
 
                     <div className="row">{/* ask here */}</div>
