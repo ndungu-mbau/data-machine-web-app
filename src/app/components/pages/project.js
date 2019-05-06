@@ -32,7 +32,6 @@ export default class Home extends Component {
     }
   }
   render() {
-    console.log(this.state.mission);
     return (
       <div className="k-grid k-grid--hor k-grid--root">
         <div className="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page">
@@ -89,11 +88,6 @@ export default class Home extends Component {
                         });
                       });
                     })}
-                    <div className="row">{/* ask here */}</div>
-
-                    <div className="row">{/* ask here */}</div>
-
-                    <div className="row">{/* ask here */}</div>
                   </div>
                   {/* ask here */}
                 </div>

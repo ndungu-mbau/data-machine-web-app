@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-export default class Header extends Component {
+import { withRouter } from 'react-router-dom';
+
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -63,21 +65,13 @@ export default class Header extends Component {
                 </div>
               </div>
               <ul className="k-nav k-margin-b-10">
-                <li className="k-nav__item">
-                  <a href="/settings" className="k-nav__link">
-                    <span className="k-nav__link-icon">
-                      <i className="flaticon2-calendar-3" />
-                    </span>
-                    <span className="k-nav__link-text">My Profile</span>
-                  </a>
-                </li>
                 <li className="k-nav__item k-nav__item--custom k-margin-t-15">
                   <button
                     target="_blank"
                     className="btn btn-outline-metal btn-hover-brand btn-upper btn-font-dark btn-sm btn-bold"
                     onClick={() => {
                       localStorage.clear();
-                      window.location = '/login';
+                      this.props.history.push('/login');
                     }}
                   >
                     Sign Out
@@ -91,3 +85,5 @@ export default class Header extends Component {
     );
   }
 }
+
+export default withRouter(Header);
