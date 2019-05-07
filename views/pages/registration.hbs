@@ -1,0 +1,216 @@
+{{!-- <!DOCTYPE html>
+<!-- 
+Theme: Keen - The Ultimate Bootstrap Admin Theme
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: You must have a valid license purchased only from https://themes.getbootstrap.com/product/keen-the-ultimate-bootstrap-admin-theme/ in order to legally use the theme for your project.
+-->
+<html lang="en">
+<!-- begin::Head -->
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Braiven Datakit | Login</title>
+    <meta name="description" content="User login example">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--begin::Web font -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Poppins:300,400,500,600,700"] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+
+        const token = localStorage.getItem('token')
+
+        if (token) {
+            window.location.replace('/');
+        }
+    </script>
+    </script>
+    <!--end::Web font -->
+
+
+    <!--begin::Page Custom Styles -->
+    <link href="/assets/custom/user/login-v2.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Custom Styles -->
+
+    <!--begin::Global Theme Styles -->
+    <link href="/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles -->
+
+
+    <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+</head>
+<!-- end::Head -->
+
+<!-- begin::Body -->
+
+<body class="k-login-v2--enabled k-header--fixed k-header-mobile--fixed k-aside--enabled k-aside--fixed">
+    <div id="app"></div>
+    <script>
+        window.config = {
+            env: "{{config.env}}",
+            API_URL: "{{config.API_URL}}"
+        };
+        window.env = '{{config.env}}'
+    </script>
+    <!-- begin::Global Config -->
+    <script>
+        var KAppOptions = { "colors": { "state": { "brand": "#5d78ff", "metal": "#c4c5d6", "light": "#ffffff", "accent": "#00c5dc", "primary": "#5867dd", "success": "#34bfa3", "info": "#36a3f7", "warning": "#ffb822", "danger": "#fd3995", "focus": "#9816f4" }, "base": { "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"], "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"] } } };
+    </script>
+
+    <!--begin::Page Scripts -->
+    <script src="/assets/demo/default/custom/custom/login/login.js" type="text/javascript"></script>
+    <!--end::Page Scripts -->
+
+    <!--begin::Global App Bundle -->
+    <script src="/bundles/registrationNew.bundle.js" type="text/javascript"></script>
+    <!--end::Global App Bundle -->
+
+    <!--begin::Global App Bundle -->
+    <script src="/assets/app/scripts/bundle/app.bundle.js" type="text/javascript"></script>
+    <!--end::Global App Bundle -->
+</body>
+<!-- end::Body -->
+
+</html> --}}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Purpose is a unique and beautiful collection of UI elements that are all flexible and modular. A complete and customizable solution to building the website of your dreams.">
+    <meta name="author" content="Webpixels">
+    <title>Purpose Website UI Kit - Purpose is a unique and beautiful collection of UI elements that are all flexible
+        and modular. A complete and customizable solution to building the website of your dreams.</title>
+    <!-- Favicon -->
+    {{!-- <link rel="icon" href="../../assets/img/brand/favicon.png" type="image/png"> --}}
+    <!-- Font Awesome 5 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Purpose CSS -->
+    <link rel="stylesheet" href="https://preview.webpixels.io/purpose-website-ui-kit-v2.0.0/assets/css/purpose.css"
+        id="stylesheet">
+</head>
+
+<body>
+
+    <div class="main-content">
+        
+    </div>
+    <div class="customizer">
+        <a href="#modal-customizer"
+            class="btn btn-warning btn-lg btn-icon-only rounded-circle text-white hover-scale-110 shadow-lg mr-3"
+            data-toggle="modal">
+            <span class="btn-inner--icon"><i class="far fa-palette"></i></span>
+        </a>
+        <a href="../../docs/support.html"
+            class="btn btn-lg btn-white btn-icon-only rounded-circle hover-scale-110 shadow-lg mr-3 d-none d-lg-inline-block">
+            <span class="btn-inner--icon"><i class="far fa-question"></i></span>
+        </a>
+        <a href="https://themes.getbootstrap.com/product/purpose-website-ui-kit/" target="_blank"
+            class="btn btn-lg btn-white btn-icon-only rounded-circle hover-scale-110 shadow-lg d-none d-lg-inline-block">
+            <span class="btn-inner--icon"><i class="far fa-shopping-basket"></i></span>
+        </a>
+    </div>
+    <!-- Customizer modal -->
+    <div class="modal fade fixed-right" id="modal-customizer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-vertical" role="document">
+            <form class="modal-content" id="form-customizer">
+                <div class="modal-body">
+                    <!-- Close -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+                        data-placement="left" title="Close Customizer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="text-center mx-auto mt-4 mb-5" style="width: 80px;">
+                        <img alt="Image placeholder" src="../../assets/img/icons/essential/detailed/Click.svg"
+                            class="svg-inject img-fluid">
+                    </div>
+                    <h5 class="text-center mb-2">Choose (your) Purpose</h5>
+                    <p class="text-center mb-4">
+                        Customize your preview experience by selecting skin colors and modes.
+                    </p>
+                    <hr class="mb-4">
+                    <!-- Skin color -->
+                    <h6 class="mb-1">Skin color</h6>
+                    <p class="small text-muted mb-3">
+                        Set a new theme color palette.
+                    </p>
+                    <div class="btn-group-toggle row mx-0 mb-5" data-toggle="buttons">
+                        <label class="btn btn-sm btn-neutral active col mb-2">
+                            <input type="radio" name="skin" value="default" checked>
+                            Default
+                        </label>
+                        <label class="btn btn-sm btn-neutral col-6 mb-2 mr-0">
+                            <input type="radio" name="skin" value="blue">
+                            Blue
+                        </label>
+                        <!-- <label class="btn btn-sm btn-neutral col mb-2">
+                        <input type="radio" name="skin" value="blue">
+                        Blue
+                    </label>
+                    <label class="btn btn-sm btn-neutral col-6 mb-2 mr-0">
+                        <input type="radio" name="skin" value="red">
+                        Red
+                    </label> -->
+                    </div>
+                    <!-- Skin mode -->
+                    <h6 class="mb-1">Skin mode</h6>
+                    <p class="small text-muted mb-3">
+                        Set the theme's mode: light or dark.
+                    </p>
+                    <div class="btn-group-toggle row mx-0 mb-4" data-toggle="buttons">
+                        <label class="btn btn-sm btn-neutral active flex-fill mb-2 mr-2">
+                            <input type="radio" name="mode" value="light" checked>
+                            <i class="far fa-sun mr-2"></i> Light
+                        </label>
+                        <label class="btn btn-sm btn-neutral flex-fill mb-2 mr-2">
+                            <input type="radio" name="mode" value="dark">
+                            <i class="far fa-moon mr-2"></i> Dark
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="submit" class="btn btn-block btn-primary mt-auto">
+                        Preview
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+    <script src="../../assets/js/purpose.core.js"></script>
+    <!-- Purpose JS -->
+    <script src="../../assets/js/purpose.js"></script>
+    <!-- Demo JS - remove it when starting your project -->
+    <script src="../../assets/js/demo.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104437451-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-104437451-1');
+    </script>
+</body>
+
+</html>

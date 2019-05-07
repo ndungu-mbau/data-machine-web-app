@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Purpose is a unique and beautiful collection of UI elements that are all flexible and modular. A complete and customizable solution to building the website of your dreams.">
+    <meta name="author" content="Webpixels">
+    <title>Braiven.io
+        <!-- Favicon -->
+        <link rel="icon" href="../../assets/img/brand/favicon.png" type="image/png">
+        <!-- Font Awesome 5 -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://preview.webpixels.io/purpose-website-ui-kit-v2.0.0/assets/css/purpose.css"
+            id="stylesheet">
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="container h-100vh d-flex align-items-center">
+            <div class="col">
+                <div class="row justify-content-center">
+
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+
+                        <div>
+                            <div class="mb-5 text-center">
+                                <p>Login</p>
+                                <img src="./assets/media/logos/all-black.svg" alt="">
+                                {{!-- <br>
+                                <br>
+                                <h6 class="h3">Login</h6>
+                                <p class="text-muted mb-0">Sign in to your account to continue.</p> --}}
+                            </div>
+                            <span class="clearfix"></span>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email address</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" id="input-email"
+                                            placeholder="name@example.com">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <label class="form-control-label">Password</label>
+                                        </div>
+                                        <div class="mb-2">
+                                            <a href="#!"
+                                                class="small text-muted text-underline--dashed border-primary">Lost
+                                                password?</a>
+                                        </div>
+                                    </div>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" id="input-password"
+                                            placeholder="Password">
+                                        <div style="cursor:pointer" class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-eye"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <button type="button" class="btn btn-block btn-primary">Sign in</button></div>
+                            </form>
+                            <div class="mt-4 text-center"><small>Not registered?</small>
+                                <a href="/registration" class="small font-weight-bold">Create account</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="customizer">
+        <a href="#modal-customizer"
+            class="btn btn-warning btn-lg btn-icon-only rounded-circle text-white hover-scale-110 shadow-lg mr-3"
+            data-toggle="modal">
+            <span class="btn-inner--icon"><i class="fas fa-palette"></i></span>
+        </a>
+        <a href="../../docs/support.html"
+            class="btn btn-lg btn-white btn-icon-only rounded-circle hover-scale-110 shadow-lg mr-3 d-none d-lg-inline-block">
+            <span class="btn-inner--icon"><i class="fas fa-question"></i></span>
+        </a>
+        <a href="https://themes.getbootstrap.com/product/purpose-website-ui-kit/" target="_blank"
+            class="btn btn-lg btn-white btn-icon-only rounded-circle hover-scale-110 shadow-lg d-none d-lg-inline-block">
+            <span class="btn-inner--icon"><i class="fas fa-shopping-basket"></i></span>
+        </a>
+    </div>
+    <!-- Customizer modal -->
+    <div class="modal fade fixed-right" id="modal-customizer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-vertical" role="document">
+            <form class="modal-content" id="form-customizer">
+                <div class="modal-body">
+                    <!-- Close -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+                        data-placement="left" title="Close Customizer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="text-center mx-auto mt-4 mb-5" style="width: 80px;">
+                        <img alt="Image placeholder" src="../../assets/img/icons/essential/detailed/Click.svg"
+                            class="svg-inject img-fluid">
+                    </div>
+                    <h5 class="text-center mb-2">Choose (your) Purpose</h5>
+                    <p class="text-center mb-4">
+                        Customize your preview experience by selecting skin colors and modes.
+                    </p>
+                    <hr class="mb-4">
+                    <!-- Skin color -->
+                    <h6 class="mb-1">Skin color</h6>
+                    <p class="small text-muted mb-3">
+                        Set a new theme color palette.
+                    </p>
+                    <div class="btn-group-toggle row mx-0 mb-5" data-toggle="buttons">
+                        <label class="btn btn-sm btn-neutral active col mb-2">
+                            <input type="radio" name="skin" value="default" checked>
+                            Default
+                        </label>
+                        <label class="btn btn-sm btn-neutral col-6 mb-2 mr-0">
+                            <input type="radio" name="skin" value="blue">
+                            Blue
+                        </label>
+                        <!-- <label class="btn btn-sm btn-neutral col mb-2">
+                        <input type="radio" name="skin" value="blue">
+                        Blue
+                    </label>
+                    <label class="btn btn-sm btn-neutral col-6 mb-2 mr-0">
+                        <input type="radio" name="skin" value="red">
+                        Red
+                    </label> -->
+                    </div>
+                    <!-- Skin mode -->
+                    <h6 class="mb-1">Skin mode</h6>
+                    <p class="small text-muted mb-3">
+                        Set the theme's mode: light or dark.
+                    </p>
+                    <div class="btn-group-toggle row mx-0 mb-4" data-toggle="buttons">
+                        <label class="btn btn-sm btn-neutral active flex-fill mb-2 mr-2">
+                            <input type="radio" name="mode" value="light" checked>
+                            <i class="fas fa-sun mr-2"></i> Light
+                        </label>
+                        <label class="btn btn-sm btn-neutral flex-fill mb-2 mr-2">
+                            <input type="radio" name="mode" value="dark">
+                            <i class="fas fa-moon mr-2"></i> Dark
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="submit" class="btn btn-block btn-primary mt-auto">
+                        Preview
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+    <script src="../../assets/js/purpose.core.js"></script>
+    <!-- Purpose JS -->
+    <script src="../../assets/js/purpose.js"></script>
+    <!-- Demo JS - remove it when starting your project -->
+    <script src="../../assets/js/demo.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104437451-1"></script>
+    <script>
+        window.config = {
+            env: "{{config.env}}",
+            API_URL: "{{config.API_URL}}"
+        };
+        window.env = "{{config.env}}"
+    </script>
+</body>
+
+</html>
