@@ -75,7 +75,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "host": "serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -98,10 +99,12 @@
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.13.0",
+    "http-server": "^0.11.1",
     "husky": "^2.2.0",
     "lint-staged": "^8.1.6",
     "prettier": "^1.17.0",
-    "pretty-quick": "^1.10.0"
+    "pretty-quick": "^1.10.0",
+    "serve": "^11.0.0"
   },
   "husky": {
     "hooks": {
