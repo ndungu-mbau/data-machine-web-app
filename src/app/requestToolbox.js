@@ -17,7 +17,7 @@ const { apiUrl } = getEnv();
 export async function requestBackend(data, url) {
   return axios({
     method: 'post',
-    url: `${apiUrl}/${url}`,
+    url: `${apiUrl}${url}`,
     data: data,
   });
 }
