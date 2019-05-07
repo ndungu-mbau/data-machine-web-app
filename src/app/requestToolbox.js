@@ -1,10 +1,23 @@
 import axios from 'axios';
-import toast from './services/toast';
+
+import config from '../config';
+
+const getEnv = () => {
+  if (window.location.href.includes('localhost') || window.location.href.includes('0.0.0.0')) {
+    return config['development'];
+  } else if (window.location.href.includes('staging')) {
+    return config['staging'];
+  } else {
+    return config['production'];
+  }
+};
+
+const { apiUrl } = getEnv();
 
 export async function requestBackend(data, url) {
   return axios({
     method: 'post',
-    url: `http://localhost:4000${url}`,
+    url: `${apiUrl}/${url}`,
     data: data,
   });
 }
@@ -12,7 +25,7 @@ export async function requestBackend(data, url) {
 export async function graphQuery(query, variables) {
   return axios({
     method: 'post',
-    url: `http://localhost:4000`,
+    url: `${apiUrl}`,
     data: {
       query,
       variables,
