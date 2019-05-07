@@ -1,7 +1,38 @@
 import React, { Component } from 'react';
 import DOMPurify from 'dompurify';
 
+import Modal from '../layouts/modals/create_signature';
+
+const $ = window.$;
+
 export default class Decider extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModal: false,
+    };
+  }
+  handleHideModal() {
+    this.setState({ showModal: false });
+  }
+  handleShowModal() {
+    this.setState({ showModal: true });
+  }
+  componentDidMount() {
+    $('#kt_datepicker_6').datepicker();
+    $('#kt_datetimepicker_7').datetimepicker({
+      format: 'hh:ii',
+      showMeridian: !0,
+      todayHighlight: !0,
+      autoclose: !0,
+      startView: 1,
+      minView: 0,
+      maxView: 1,
+      forceParse: 0,
+      pickerPosition: 'bottom-left',
+    });
+  }
   render() {
     const { type, placeholder, options, tag, sentences } = this.props.question.question;
 
@@ -74,23 +105,22 @@ export default class Decider extends Component {
     if (type === 'multipleSelect')
       return (
         <div className="k-checkbox-list">
-          <label className="k-checkbox">
-            <input type="checkbox" />
-            er
-            <span />
-          </label>
-          <label className="k-checkbox">
-            <input type="checkbox" />
-            er
-            <span />
-          </label>
+          {options.map(option => {
+            return (
+              <label className="k-checkbox">
+                <input type="checkbox" />
+                {option.label}
+                <span />
+              </label>
+            );
+          })}
         </div>
       );
 
     if (type === 'GpsCoordinates')
       return (
         <div className="row">
-          <div className="col-lg-4 text-center">
+          <div className="col-lg-2 text-center">
             <i className="flaticon-placeholder-3 k-font-info" style={{ fontSize: '50px' }} />
           </div>
           <div className="col-lg-8">
@@ -111,19 +141,42 @@ export default class Decider extends Component {
               <i className="form-group__bar" />
             </div>
           </div>
-          <div className="col-lg-4">
-            <button className="btn btn-sm btn-success">Query</button>
+          <div className="col-lg-2">
+            <button className="btn btn-block btn-brand btn-sm">Query</button>
           </div>
         </div>
       );
 
-    if (type === 'file') return <input placeholder=" " type="file" className="form-control" />;
+    if (type === 'file')
+      return (
+        <div className="row">
+          <div className="col-lg-10 text-center">
+            <input placeholder=" " type="file" className="form-control" />
+          </div>
+        </div>
+      );
 
     if (type === 'time')
       return (
         <div className="row">
-          <div className="col-lg-4 text-center">
+          <div className="col-lg-2 text-center">
             <i className="flaticon-clock-1 k-font-info" style={{ fontSize: '50px' }} />
+          </div>
+          <div className="col-lg-8 col-md-9 col-sm-12">
+            <br />
+            <div className="input-group date">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Select time"
+                id="kt_datetimepicker_7"
+              />
+              <div className="input-group-append">
+                <span className="input-group-text">
+                  <i className="la la-calendar glyphicon-th" />
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -131,8 +184,11 @@ export default class Decider extends Component {
     if (type === 'date')
       return (
         <div className="row">
-          <div className="col-lg-4 text-center">
+          <div className="col-lg-2 text-center">
             <i className="flaticon-calendar-with-a-clock-time-tools" style={{ fontSize: '50px' }} />
+          </div>
+          <div className="col-lg-8 col-md-9 col-sm-12">
+            <div className id="kt_datepicker_6" />
           </div>
         </div>
       );
@@ -140,11 +196,20 @@ export default class Decider extends Component {
     if (type === 'signature')
       return (
         <div className="row">
-          <div className="col-lg-4 text-center">
+          <div className="col-lg-2 text-center">
             <i
               className="flaticon2-edit-interface-symbol-of-pencil-tool"
               style={{ fontSize: '50px' }}
             />
+          </div>
+          <div className="col-lg-8 text-center">
+            <br />
+            <button className="btn btn-default btn-block" onClick={() => this.handleShowModal()}>
+              Create Signature
+            </button>
+            {this.state.showModal === true ? (
+              <Modal handleHideModal={() => this.handleHideModal()} />
+            ) : null}
           </div>
         </div>
       );

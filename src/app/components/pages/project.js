@@ -5,8 +5,6 @@ import Header from '../layouts/header';
 import Decider from '../layouts/decider';
 import _ from 'underscore';
 
-import DOMPurify from 'dompurify';
-
 import Data from '../../services/data';
 
 export default class Home extends Component {
@@ -17,7 +15,14 @@ export default class Home extends Component {
       mission: {
         pages: [],
       },
+      showModal: false,
     };
+  }
+  handleHideModal() {
+    this.setState({ showModal: false });
+  }
+  handleShowModal() {
+    this.setState({ showModal: true });
   }
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);
@@ -42,23 +47,14 @@ export default class Home extends Component {
           <div className="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper">
             <Header />
             <div className="k-content k-grid__item k-grid__item--fluid k-grid k-grid--hor">
-              <div className="k-content__head k-grid__item">
-                <div
-                  data-intro="This section contains simple statistics of the company"
-                  data-position="right"
-                  data-step={6}
-                  className="k-content__head-main"
-                >
-                  <h3 className="k-content__head-title">{this.state.mission.name}</h3>
+              <div className="k-portlet">
+                <div className="k-portlet__head">
+                  <div className="k-portlet__head-label">
+                    <h3 className="k-portlet__head-title">{this.state.mission.name}</h3>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="k-content k-grid__item k-grid__item--fluid k-grid k-grid--hor">
-              <div className="k-content__body k-grid__item k-grid__item--fluid">
-                {/* body content here */}
-
-                <div className="row container">
-                  <div className="col-lg-8">
+                <div className="k-portlet__body">
+                  <div className="k-portlet__content">
                     {this.state.mission.pages.map(page => {
                       return _.sortBy(page.groups, 'name').map(group => {
                         let questionsOrdered = [];
@@ -77,11 +73,7 @@ export default class Home extends Component {
                         return questionsCleaned.map(question => {
                           return (
                             <span key={question.id}>
-                              <div className="row">
-                                <Decider question={{ question }} />
-
-                                {/* <pre>{JSON.stringify(question, null, '\t')}</pre> */}
-                              </div>
+                              <Decider question={{ question }} />
                               <br />
                             </span>
                           );
@@ -89,10 +81,16 @@ export default class Home extends Component {
                       });
                     })}
                   </div>
-                  {/* ask here */}
                 </div>
-
-                {/* other questions come in here */}
+                <div className="k-portlet__foot">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <button type="button" className="btn btn-sm btn-brand float-right">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

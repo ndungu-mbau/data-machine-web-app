@@ -32,7 +32,7 @@ class Sidebar extends Component {
         >
           <div className="k-aside__brand-logo">
             <Link to="/">
-              <img alt="Logo" src="/assets/media/logos/v3-white.svg" style={{ height: '40px' }} />
+              <img alt="Logo" src="/assets/media/logos/v4-white.svg" style={{ height: '20px' }} />
             </Link>
           </div>
           <div className="k-aside__brand-tools">
@@ -87,20 +87,6 @@ class Sidebar extends Component {
             </div>
             <div className="ps__rail-y" style={{ top: '0px', right: '2px' }}>
               <div className="ps__thumb-y" tabIndex={0} style={{ top: '0px', height: '0px' }} />
-            </div>
-          </div>
-        </div>
-        <div
-          id="k_aside_footer"
-          className="k-aside__footer k-grid__item"
-          k-hidden-height={59}
-          style={{}}
-        >
-          <div className="k-aside__footer-nav">
-            <div className="k-aside__footer-item">
-              <a href="/settings" className="btn btn-icon">
-                <i className="flaticon2-gear" />
-              </a>
             </div>
           </div>
         </div>
