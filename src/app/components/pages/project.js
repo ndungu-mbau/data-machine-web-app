@@ -75,7 +75,22 @@ export default class Home extends Component {
                             return questionsCleaned.map(question => {
                               return (
                                 <span key={question.id}>
-                                  <Decider question={{ question }} />
+                                  <Decider
+                                    question={{ question }}
+                                    getAnswer={({ tag }) => {
+                                      Data.getAnswer({
+                                        mission: this.state.mission.id,
+                                        tag,
+                                      });
+                                    }}
+                                    setAnswer={({ tag, value }) => {
+                                      Data.setAnswer({
+                                        mission: this.state.mission.id,
+                                        tag,
+                                        value,
+                                      });
+                                    }}
+                                  />
                                   <br />
                                 </span>
                               );

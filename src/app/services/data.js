@@ -77,6 +77,7 @@ var Data = (function() {
         missions = response.data.user.client.projects;
 
         missions.map(mission => {
+          mission.answers = {};
           missionsMap[mission.id] = mission;
         });
 
@@ -136,12 +137,20 @@ var Data = (function() {
           }),
         );
 
+        questionnaire.answers = {};
         missionsMap[questionnaire.id] = questionnaire;
 
         return questionnaire;
       } else {
         return missionsMap[id];
       }
+    },
+    setAnswer: async function({ mission, tag, value }) {
+      console.log(missionsMap[mission]);
+      missionsMap[mission].answers[tag] = value;
+    },
+    getAnswer: async function({ mission, tag }) {
+      return missionsMap[mission].answers[tag];
     },
   };
 })();

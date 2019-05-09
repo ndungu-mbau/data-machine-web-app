@@ -16,7 +16,9 @@ class Header extends Component {
       userInfo: JSON.parse(localStorage.getItem('user')),
     };
   }
-  componentDidMount = KLayout.init();
+  componentDidMount() {
+    KLayout.init();
+  }
   render() {
     return (
       <div id="k_header" className="k-header k-grid__item k-header--fixed">

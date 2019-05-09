@@ -19,6 +19,12 @@ export default class Decider extends Component {
   handleShowModal() {
     this.setState({ showModal: true });
   }
+  setAnswer({ tag, value }) {
+    this.props.setAnswer({ tag, value });
+  }
+  getAnswer({ tag, value }) {
+    return this.props.getAnswer({ tag });
+  }
   componentDidMount() {
     $('#kt_datepicker_6').datepicker();
     $('#kt_datetimepicker_7').datetimepicker({
@@ -53,7 +59,7 @@ export default class Decider extends Component {
           <div className="k-radio-list">
             {options.map(option => {
               return (
-                <label className="k-radio">
+                <label key={option.label + option.value} className="k-radio">
                   <input name={tag} type="radio" />
                   {option.label}
                   <span />
@@ -65,7 +71,20 @@ export default class Decider extends Component {
       );
 
     if (type === 'input')
-      return <input placeholder={placeholder} type="text" className="form-control" />;
+      return (
+        <input
+          placeholder={placeholder}
+          type="text"
+          className="form-control"
+          onChange={e => {
+            this.setAnswer({
+              tag,
+              value: e.target.value,
+            });
+          }}
+          value={this.getAnswer({ tag })}
+        />
+      );
 
     if (type === 'likert')
       return (
@@ -75,18 +94,18 @@ export default class Decider extends Component {
               <tr>
                 <td />
                 {options.map(option => {
-                  return <td>{option.label}</td>;
+                  return <td key={option.label}>{option.label}</td>;
                 })}
               </tr>
             </thead>
             <tbody>
               {sentences.map(sentences => {
                 return (
-                  <tr>
+                  <tr key={sentences.sentenceLabel}>
                     <td>{sentences.sentenceLabel}</td>
                     {options.map(option => {
                       return (
-                        <td>
+                        <td key={option.label + option.value}>
                           <label className="k-radio">
                             <input name={sentences.sentenceLabel} type="radio" />
                             <span />
@@ -107,7 +126,7 @@ export default class Decider extends Component {
         <div className="k-checkbox-list">
           {options.map(option => {
             return (
-              <label className="k-checkbox">
+              <label key={option.label + option.value} className="k-checkbox">
                 <input type="checkbox" />
                 {option.label}
                 <span />
