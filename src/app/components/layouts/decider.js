@@ -150,7 +150,24 @@ export default class Decider extends Component {
     if (type === 'file')
       return (
         <div className="row">
-          <div className="col-lg-10 text-center">
+          <div className="col-lg-2 text-center">
+            <i className="flaticon-attachment k-font-info" style={{ fontSize: '50px' }} />
+          </div>
+          <div className="col-lg-8 col-md-9 col-sm-12">
+            <br />
+            <input placeholder=" " type="file" className="form-control" />
+          </div>
+        </div>
+      );
+
+    if (type === 'cameraImage')
+      return (
+        <div className="row">
+          <div className="col-lg-2 text-center">
+            <i className="flaticon-photo-camera k-font-info" style={{ fontSize: '50px' }} />
+          </div>
+          <div className="col-lg-8 col-md-9 col-sm-12">
+            <br />
             <input placeholder=" " type="file" className="form-control" />
           </div>
         </div>

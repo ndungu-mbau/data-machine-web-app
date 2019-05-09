@@ -24,7 +24,7 @@ class Modal extends Component {
               <div className="modal-body">
                 <SignatureCanvas
                   penColor="blue"
-                  canvasProps={{ width: '1000', height: '800', className: 'sigCanvas' }}
+                  canvasProps={{ width: '700', height: '400', className: 'sigCanvas' }}
                 />
               </div>
             </div>
