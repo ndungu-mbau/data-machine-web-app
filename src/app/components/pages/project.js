@@ -47,47 +47,51 @@ export default class Home extends Component {
           <div className="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper">
             <Header />
             <div className="k-content k-grid__item k-grid__item--fluid k-grid k-grid--hor">
-              <div className="k-portlet">
-                <div className="k-portlet__head">
-                  <div className="k-portlet__head-label">
-                    <h3 className="k-portlet__head-title">{this.state.mission.name}</h3>
-                  </div>
-                </div>
-                <div className="k-portlet__body">
-                  <div className="k-portlet__content">
-                    {this.state.mission.pages.map(page => {
-                      return _.sortBy(page.groups, 'name').map(group => {
-                        let questionsOrdered = [];
+              <div className="row">
+                <div className="col-12 col-lg-8 col-md-10 col-sm-12">
+                  <div className="k-portlet">
+                    <div className="k-portlet__head">
+                      <div className="k-portlet__head-label">
+                        <h3 className="k-portlet__head-title">{this.state.mission.name}</h3>
+                      </div>
+                    </div>
+                    <div className="k-portlet__body">
+                      <div className="k-portlet__content">
+                        {this.state.mission.pages.map(page => {
+                          return _.sortBy(page.groups, 'name').map(group => {
+                            let questionsOrdered = [];
 
-                        if (this.state.mission.order) {
-                          group.questions.map(
-                            q => (questionsOrdered[this.state.mission.order.indexOf(q.id)] = q),
-                          );
-                        } else {
-                          questionsOrdered = _.sortBy(group.questions, 'position');
-                        }
+                            if (this.state.mission.order) {
+                              group.questions.map(
+                                q => (questionsOrdered[this.state.mission.order.indexOf(q.id)] = q),
+                              );
+                            } else {
+                              questionsOrdered = _.sortBy(group.questions, 'position');
+                            }
 
-                        // // filter to spread to get more natural positions and remove empty spaces
-                        const questionsCleaned = [...questionsOrdered.filter(q => q)];
+                            // // filter to spread to get more natural positions and remove empty spaces
+                            const questionsCleaned = [...questionsOrdered.filter(q => q)];
 
-                        return questionsCleaned.map(question => {
-                          return (
-                            <span key={question.id}>
-                              <Decider question={{ question }} />
-                              <br />
-                            </span>
-                          );
-                        });
-                      });
-                    })}
-                  </div>
-                </div>
-                <div className="k-portlet__foot">
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <button type="button" className="btn btn-sm btn-brand float-right">
-                        Submit
-                      </button>
+                            return questionsCleaned.map(question => {
+                              return (
+                                <span key={question.id}>
+                                  <Decider question={{ question }} />
+                                  <br />
+                                </span>
+                              );
+                            });
+                          });
+                        })}
+                      </div>
+                    </div>
+                    <div className="k-portlet__foot">
+                      <div className="row">
+                        <div className="col-lg-12">
+                          <button type="button" className="btn btn-sm btn-brand float-right">
+                            Submit
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
