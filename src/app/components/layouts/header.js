@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Mobileheader from '../layouts/mobileHeader';
 
 import { withRouter } from 'react-router-dom';
 
+const KLayout = window.KLayout;
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +16,11 @@ class Header extends Component {
       userInfo: JSON.parse(localStorage.getItem('user')),
     };
   }
+  componentDidMount = KLayout.init();
   render() {
     return (
       <div id="k_header" className="k-header k-grid__item k-header--fixed">
+        <Mobileheader />
         <button id="k_header_menu_mobile_close_btn" className="k-header-menu-wrapper-close">
           <i className="la la-close" />
         </button>

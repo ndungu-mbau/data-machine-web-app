@@ -9624,6 +9624,7 @@ var KLayout = (function() {
 
 $(document).ready(function() {
   KLayout.init();
+  window.KLayout = KLayout
 });
 ('use strict');
 var KAsideSecondary = (function() {
