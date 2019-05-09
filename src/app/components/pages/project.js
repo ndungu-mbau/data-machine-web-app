@@ -24,6 +24,10 @@ export default class Home extends Component {
   handleShowModal() {
     this.setState({ showModal: true });
   }
+  async submitForm({ mission }) {
+    await Data.submitToServer({ mission });
+    // show user success if done
+  }
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);
 
@@ -102,7 +106,13 @@ export default class Home extends Component {
                     <div className="k-portlet__foot">
                       <div className="row">
                         <div className="col-lg-12">
-                          <button type="button" className="btn btn-sm btn-brand float-right">
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-brand float-right"
+                            onClick={() => {
+                              this.submitForm({ mission: this.state.mission.id });
+                            }}
+                          >
                             Submit
                           </button>
                         </div>

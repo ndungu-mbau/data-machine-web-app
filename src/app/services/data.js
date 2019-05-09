@@ -1,9 +1,16 @@
-import { graphQuery } from '../requestToolbox';
+import { graphQuery, requestBackend } from '../requestToolbox';
+
+function randomString(length, chars) {
+  var result = '';
+  for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+}
 
 var Data = (function() {
   var instance;
   var missions;
   var missionsMap = {};
+  var missionsQuestionnaireMap = {};
 
   function createInstance() {
     var object = new Object('I am the instance');
@@ -78,7 +85,9 @@ var Data = (function() {
 
         missions.map(mission => {
           mission.answers = {};
-          missionsMap[mission.id] = mission;
+          missionsMap[mission.id] = mission.questionnaire;
+
+          missionsQuestionnaireMap[mission.questionnaire.id] = mission.id;
         });
 
         return missions;
@@ -146,11 +155,37 @@ var Data = (function() {
       }
     },
     setAnswer: async function({ mission, tag, value }) {
-      console.log(missionsMap[mission]);
       missionsMap[mission].answers[tag] = value;
     },
     getAnswer: async function({ mission, tag }) {
       return missionsMap[mission].answers[tag];
+    },
+    async submitToServer({ mission }) {
+      // attatch user data and questionnaire data
+
+      const userData = JSON.parse(localStorage.getItem('user'));
+
+      const { _id, firstName, phoneNumber, email, client } = userData;
+
+      var completionId = randomString(
+        6,
+        '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      );
+
+      console.log(missionsMap[mission]);
+      Object.assign(missionsMap[mission].answers, {
+        projectId: missionsQuestionnaireMap[mission],
+        client,
+        questionnaireId: missionsMap[mission].id,
+        completedAt: new Date().toISOString(),
+        userId: _id,
+        __agentFirstName: firstName,
+        __agentPhoneNumber: phoneNumber,
+        __agentEmail: email,
+        completionId,
+      });
+
+      requestBackend(missionsMap[mission].answers, '/submision');
     },
   };
 })();

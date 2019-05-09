@@ -39,7 +39,6 @@ export default class Login extends Component {
             'user',
             JSON.stringify(
               Object.assign({}, response.data, {
-                _id: undefined,
                 token: undefined,
               }),
             ),

@@ -60,7 +60,28 @@ export default class Decider extends Component {
             {options.map(option => {
               return (
                 <label key={option.label + option.value} className="k-radio">
-                  <input name={tag} type="radio" />
+                  <input
+                    name={tag}
+                    type="radio"
+                    onClick={() => {
+                      // set this one as true
+                      this.setAnswer({
+                        tag: `${tag}`,
+                        value: `${tag}_${option.label}`,
+                      });
+                      this.setAnswer({
+                        tag: `${tag}_${option.label}`,
+                        value: option.value,
+                      });
+                      // filter then set the remaining to undefined
+
+                      options.map(({ value: opValue, label }) => {
+                        if (option.label !== label) {
+                          this.setAnswer(`${tag}_${option.label}`, undefined);
+                        }
+                      });
+                    }}
+                  />
                   {option.label}
                   <span />
                 </label>
