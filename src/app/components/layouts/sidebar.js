@@ -17,6 +17,13 @@ class Sidebar extends Component {
     var data = await Data.getMissions();
 
     this.setState({ missions: data });
+
+    // check route and route to first project if we are on home and not showing any project
+    // later this can be replaced with settings on the org
+    const { pathname } = this.props.location;
+    if (pathname === '/') {
+      this.props.history.push(`/project/${data[0].questionnaire.id}`);
+    }
   }
   render() {
     return (
