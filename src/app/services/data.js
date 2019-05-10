@@ -1,4 +1,6 @@
 import { graphQuery, requestBackend } from '../requestToolbox';
+import moment from 'moment';
+import 'moment-timezone';
 
 function randomString(length, chars) {
   var result = '';
@@ -182,6 +184,7 @@ var Data = (function() {
         __agentFirstName: firstName,
         __agentPhoneNumber: phoneNumber,
         __agentEmail: email,
+        __timezone: moment.tz.guess(),
         completionId,
       });
 

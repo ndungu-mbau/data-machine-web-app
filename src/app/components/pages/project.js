@@ -31,7 +31,13 @@ export default class Home extends Component {
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);
 
-    this.setState({ mission: data });
+    this.setState({ mission: data }, function() {
+      Data.setAnswer({
+        mission: this.state.mission.id,
+        tag: 'startedAt',
+        value: new Date().toISOString(),
+      });
+    });
   }
   async componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
