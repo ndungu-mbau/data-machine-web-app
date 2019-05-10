@@ -10,7 +10,9 @@ class File extends Component {
   };
 
   onChange = e => {
-    console.log(e);
+    e.preventDefault();
+    e.persist();
+
     this.setState({ file: e.target.files[0] });
   };
 
