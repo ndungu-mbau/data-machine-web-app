@@ -4,6 +4,7 @@ import Sidebar from '../layouts/sidebar';
 import Header from '../layouts/header';
 import Decider from '../layouts/decider';
 import _ from 'underscore';
+import swal from 'sweetalert';
 
 import Data from '../../services/data';
 
@@ -25,8 +26,30 @@ export default class Home extends Component {
     this.setState({ showModal: true });
   }
   async submitForm({ mission }) {
-    await Data.submitToServer({ mission });
-    // show user success if done
+    // swal to ask if you are sure you want
+    swal({
+      title: 'Are you sure?',
+      text: 'Once you submit this, you cannot change the selected values',
+      icon: 'warning',
+      buttons: {
+        cancel: 'cancel',
+        catch: {
+          text: 'Ok',
+          value: 'submit',
+        },
+      },
+    }).then(async value => {
+      // show user success if done
+      if (value === 'submit') {
+        await Data.submitToServer({ mission });
+        swal({
+          title: 'Success',
+          text:
+            'The data you have submitted has been sent to you via mail and is accessible on your uploads screen',
+          icon: 'success',
+        });
+      }
+    });
   }
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);

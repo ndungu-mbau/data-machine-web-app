@@ -188,7 +188,7 @@ var Data = (function() {
         completionId,
       });
 
-      requestBackend(missionsMap[mission].answers, '/submision');
+      return requestBackend(missionsMap[mission].answers, '/submision');
     },
   };
 })();
