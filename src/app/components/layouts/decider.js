@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DOMPurify from 'dompurify';
 
 import Modal from '../layouts/modals/create_signature';
+import File from './pickers/file';
 
 const $ = window.$;
 
@@ -187,18 +188,7 @@ export default class Decider extends Component {
         </div>
       );
 
-    if (type === 'file')
-      return (
-        <div className="row">
-          <div className="col-lg-2 text-center">
-            <i className="flaticon-attachment k-font-info" style={{ fontSize: '50px' }} />
-          </div>
-          <div className="col-lg-8 col-md-9 col-sm-12">
-            <br />
-            <input placeholder=" " type="file" className="form-control" />
-          </div>
-        </div>
-      );
+    if (type === 'file') return <File />;
 
     if (type === 'cameraImage')
       return (
