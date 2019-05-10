@@ -9,22 +9,21 @@ class File extends Component {
     file: '',
   };
 
-  onChange = e => {
+  onChange = async e => {
     e.preventDefault();
     e.persist();
 
     this.setState({ file: e.target.files[0] });
-  };
 
-  onClickHandler = async () => {
     const data = new FormData();
-    data.append('file', this.state.file);
+    data.append('file', e.target.files[0]);
     const res = await axios.request({
       url,
       method: 'post',
       data,
       onUploadProgress: console.log,
     });
+
     console.log(res);
   };
 
