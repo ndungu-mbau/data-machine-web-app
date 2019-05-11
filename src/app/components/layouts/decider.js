@@ -188,20 +188,9 @@ export default class Decider extends Component {
         </div>
       );
 
-    if (type === 'file') return <File {...this.props} />;
+    if (type === 'file') return <File type="file" {...this.props} />;
 
-    if (type === 'cameraImage')
-      return (
-        <div className="row">
-          <div className="col-lg-2 text-center">
-            <i className="flaticon-photo-camera k-font-info" style={{ fontSize: '50px' }} />
-          </div>
-          <div className="col-lg-8 col-md-9 col-sm-12">
-            <br />
-            <input placeholder=" " type="file" className="form-control" />
-          </div>
-        </div>
-      );
+    if (type === 'cameraImage') return <File type="cameraImage" {...this.props} />;
 
     if (type === 'time')
       return (

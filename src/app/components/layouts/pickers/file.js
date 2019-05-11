@@ -33,7 +33,12 @@ class File extends Component {
     return (
       <div className="row">
         <div className="col-lg-2 text-center">
-          <i className="flaticon-attachment k-font-info" style={{ fontSize: '50px' }} />
+          <i
+            className={`flaticon-${
+              this.props.type === 'file' ? 'attachment' : 'photo-camera'
+            } k-font-info`}
+            style={{ fontSize: '50px' }}
+          />
         </div>
         <div className="col-lg-8 col-md-9 col-sm-12">
           <br />
