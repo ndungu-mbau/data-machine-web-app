@@ -188,7 +188,7 @@ export default class Decider extends Component {
         </div>
       );
 
-    if (type === 'file') return <File />;
+    if (type === 'file') return <File {...this.props} />;
 
     if (type === 'cameraImage')
       return (
