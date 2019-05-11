@@ -17,14 +17,16 @@ class File extends Component {
 
     const data = new FormData();
     data.append('file', e.target.files[0]);
-    const res = await axios.request({
-      url,
+    const {
+      data: { uri },
+    } = await axios({
+      url: `${url}/upload`,
       method: 'post',
       data,
       onUploadProgress: console.log,
     });
 
-    console.log(res);
+    this.props.setAnswer({ tag: this.props.question.question.tag, value: uri });
   };
 
   render = () => {
