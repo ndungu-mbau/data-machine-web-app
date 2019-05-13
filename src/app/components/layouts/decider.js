@@ -239,12 +239,30 @@ export default class Decider extends Component {
             />
           </div>
           <div className="col-lg-8 text-center">
+            {this.getAnswer({
+              tag,
+            }) ? (
+              <img
+                alt="signature"
+                src={this.getAnswer({
+                  tag,
+                })}
+              />
+            ) : null}
             <br />
             <button className="btn btn-default btn-block" onClick={() => this.handleShowModal()}>
               Create Signature
             </button>
             {this.state.showModal === true ? (
-              <Modal handleHideModal={() => this.handleHideModal()} />
+              <Modal
+                handleHideModal={() => this.handleHideModal()}
+                setAnswer={({ value }) => {
+                  this.setAnswer({
+                    tag,
+                    value,
+                  });
+                }}
+              />
             ) : null}
           </div>
         </div>

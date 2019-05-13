@@ -25,6 +25,9 @@ class Modal extends Component {
                 <SignatureCanvas
                   penColor="blue"
                   canvasProps={{ width: '700', height: '400', className: 'sigCanvas' }}
+                  ref={ref => {
+                    this.sigCanvas = ref;
+                  }}
                 />
               </div>
             </div>
@@ -32,7 +35,14 @@ class Modal extends Component {
               <button type="button" className="btn btn-default" data-dismiss="modal">
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  this.props.setAnswer({ value: this.sigCanvas.toDataURL() });
+                  $(ReactDOM.findDOMNode(this)).modal('hide');
+                }}
+              >
                 Save changes
               </button>
             </div>

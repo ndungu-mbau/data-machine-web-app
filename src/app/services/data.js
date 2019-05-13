@@ -159,7 +159,12 @@ var Data = (function() {
     setAnswer: async function({ mission, tag, value }) {
       missionsMap[mission].answers[tag] = value;
     },
-    getAnswer: async function({ mission, tag }) {
+    getAnswer: function({ mission, tag }) {
+      console.log({
+        tag,
+        options: missionsMap[mission].answers,
+        found: missionsMap[mission].answers[tag],
+      });
       return missionsMap[mission].answers[tag];
     },
     async submitToServer({ mission }) {
