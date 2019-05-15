@@ -29,13 +29,12 @@ var Data = (function() {
     getMissions: async function() {
       if (!missions) {
         console.log('fetching missions');
-        var { data: response } = await graphQuery(`{
+        var { data: response } = await graphQuery(`
+          {
             user {
-              client {
-                teams {
-                  id
-                  name
-                }
+              teams {
+                id
+                name
                 projects {
                   id
                   name
@@ -80,10 +79,11 @@ var Data = (function() {
                 }
               }
             }
-          }
-          `);
+          }`);
 
-        missions = response.data.user.client.projects;
+        const projects = [];
+        response.data.user.teams.map(t => projects.push(...t.projects));
+        missions = projects;
 
         missions.map(mission => {
           mission.answers = {};
