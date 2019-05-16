@@ -26,6 +26,7 @@ export default class Home extends Component {
     this.setState({ showModal: true });
   }
   async submitForm({ mission }) {
+    //Check validations before submit
     // swal to ask if you are sure you want
     swal
       .fire({
@@ -46,7 +47,16 @@ export default class Home extends Component {
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);
 
-    this.setState({ mission: data }, function() {
+    const validations = data.pages.map(page => {
+      return page.groups.map(group => {
+        return group.questions.reduce(
+          (acc, q) => (acc = { ...acc, [q.tag]: JSON.parse(q.validation) }),
+          {},
+        );
+      });
+    });
+
+    this.setState({ mission: data, validations }, function() {
       Data.setAnswer({
         mission: this.state.mission.id,
         tag: 'startedAt',
