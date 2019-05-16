@@ -27,6 +27,8 @@ export default class Home extends Component {
   }
   async submitForm({ mission }) {
     //Check validations before submit
+    const { answers } = mission;
+    const { validations } = this.state;
     // swal to ask if you are sure you want
     swal
       .fire({
@@ -47,11 +49,11 @@ export default class Home extends Component {
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);
 
-    const validations = data.pages.map(page => {
-      return page.groups.map(group => {
-        return group.questions.reduce(
-          (acc, q) => (acc = { ...acc, [q.tag]: JSON.parse(q.validation) }),
-          {},
+    let validations = {};
+    data.pages.forEach(page => {
+      page.groups.forEach(group => {
+        group.questions.forEach(
+          q => (validations = { ...validations, [q.tag]: JSON.parse(q.validation) }),
         );
       });
     });
