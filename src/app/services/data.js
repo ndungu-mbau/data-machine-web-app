@@ -158,13 +158,18 @@ var Data = (function() {
     },
     setAnswer: async function({ mission, tag, value }) {
       missionsMap[mission].answers[tag] = value;
+      // console.log('setting value', {
+      //   tag,
+      //   value,
+      //   found: missionsMap[mission].answers[tag],
+      // });
     },
     getAnswer: function({ mission, tag }) {
-      console.log({
-        tag,
-        options: missionsMap[mission].answers,
-        found: missionsMap[mission].answers[tag],
-      });
+      // console.log('fetching value', {
+      //   tag,
+      //   options: missionsMap[mission].answers,
+      //   found: missionsMap[mission].answers[tag],
+      // });
       return missionsMap[mission].answers[tag];
     },
     async submitToServer({ mission }) {
