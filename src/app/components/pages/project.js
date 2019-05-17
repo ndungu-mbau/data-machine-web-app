@@ -5,6 +5,7 @@ import Header from '../layouts/header';
 import Decider from '../layouts/decider';
 import _ from 'underscore';
 import swal from 'sweetalert2';
+import validate from 'validate.js';
 
 import Data from '../../services/data';
 
@@ -27,9 +28,11 @@ export default class Home extends Component {
   }
   async submitForm({ mission }) {
     //Check validations before submit
-    const { answers } = mission;
+    const { answers } = this.state.mission;
     const { validations } = this.state;
     // swal to ask if you are sure you want
+    const valid = validate(answers, validations);
+    console.log(valid);
     swal
       .fire({
         title: 'Are you sure?',
