@@ -29,13 +29,12 @@ var Data = (function() {
     getMissions: async function() {
       if (!missions) {
         console.log('fetching missions');
-        var { data: response } = await graphQuery(`{
+        var { data: response } = await graphQuery(`
+          {
             user {
-              client {
-                teams {
-                  id
-                  name
-                }
+              teams {
+                id
+                name
                 projects {
                   id
                   name
@@ -80,10 +79,11 @@ var Data = (function() {
                 }
               }
             }
-          }
-          `);
+          }`);
 
-        missions = response.data.user.client.projects;
+        const projects = [];
+        response.data.user.teams.map(t => projects.push(...t.projects));
+        missions = projects;
 
         missions.map(mission => {
           mission.answers = {};
@@ -158,13 +158,18 @@ var Data = (function() {
     },
     setAnswer: async function({ mission, tag, value }) {
       missionsMap[mission].answers[tag] = value;
+      // console.log('setting value', {
+      //   tag,
+      //   value,
+      //   found: missionsMap[mission].answers[tag],
+      // });
     },
     getAnswer: function({ mission, tag }) {
-      console.log({
-        tag,
-        options: missionsMap[mission].answers,
-        found: missionsMap[mission].answers[tag],
-      });
+      // console.log('fetching value', {
+      //   tag,
+      //   options: missionsMap[mission].answers,
+      //   found: missionsMap[mission].answers[tag],
+      // });
       return missionsMap[mission].answers[tag];
     },
     async submitToServer({ mission }) {

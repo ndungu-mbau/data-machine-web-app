@@ -9,6 +9,55 @@ import validate from 'validate.js';
 
 import Data from '../../services/data';
 
+const getTag = (parentTag, { questionnaire }) => {
+  let parent = null;
+  questionnaire.pages.map(page => {
+    page.groups.map(group => {
+      group.questions.map(question => {
+        if (question.tag === parentTag) return (parent = question);
+
+        if (!question.options) return;
+
+        return question.options.map(option => {
+          // console.log(question.tag + "_" + option.label, parentTag)
+          if (question.type === 'multiSelect') {
+            if (question.tag + '_option_' + option.label.replace(/\s/g, '_') === parentTag) {
+              return (parent = question);
+            }
+
+            return;
+          }
+
+          if (question.tag + '_' + option.label === parentTag) {
+            return (parent = question);
+          }
+        });
+      });
+    });
+  });
+
+  return parent;
+};
+
+const ShouldShow = (conditional, { getValue, questionnaire }) => {
+  // do a getTag on the conditionals parent to see if it has a parent property,
+  // if it does, keep show false and check that parent too...if that says yes then we set show as true and return it
+  // and then do a shouldShow,
+  console.log({ conditional });
+  let show = false;
+  show = getValue(conditional.parent) === conditional.parentValue;
+  if (!show) return show;
+
+  const ourQuestion = getTag(conditional.parent, { questionnaire });
+
+  if (ourQuestion && ourQuestion.conditional) {
+    const otherShouldShow = ShouldShow(ourQuestion.conditional, { getValue });
+    return otherShouldShow;
+  }
+
+  return show;
+};
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -77,6 +126,7 @@ export default class Home extends Component {
     }
   }
   render() {
+    const _this = this;
     return (
       <div className="k-grid k-grid--hor k-grid--root">
         <div className="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page">
@@ -113,13 +163,32 @@ export default class Home extends Component {
                             const questionsCleaned = [...questionsOrdered.filter(q => q)];
 
                             return questionsCleaned.map(question => {
+                              if (question.conditional) {
+                                // console.log(question,ShouldShow(question.conditional))
+                                if (
+                                  !ShouldShow(question.conditional, {
+                                    getValue: parentTag => {
+                                      return Data.getAnswer({
+                                        mission: this.state.mission.id,
+                                        tag: parentTag,
+                                      });
+                                    },
+                                    questionnaire: this.state.mission,
+                                  })
+                                ) {
+                                  // since we are not supposed to show this tag, we be nice and remove its unswer from the storage
+                                  //  so clean the slate for the children
+                                  return;
+                                }
+                              }
+
                               return (
                                 <span key={question.id}>
                                   <Decider
                                     question={{ question }}
                                     getAnswer={({ tag }) => {
                                       return Data.getAnswer({
-                                        mission: this.state.mission.id,
+                                        mission: _this.state.mission.id,
                                         tag,
                                       });
                                     }}
@@ -129,6 +198,19 @@ export default class Home extends Component {
                                         tag,
                                         value,
                                       });
+
+                                      if (this.state[_this.state.mission.id]) {
+                                        this.setState({
+                                          [this.state.mission.id]: {
+                                            ...this.state[_this.state.mission.id],
+                                            [tag]: value,
+                                          },
+                                        });
+                                      } else {
+                                        this.setState({
+                                          [this.state.mission.id]: { tag, value },
+                                        });
+                                      }
                                     }}
                                   />
                                   <br />

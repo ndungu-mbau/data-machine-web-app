@@ -23,7 +23,7 @@ export default class Decider extends Component {
   setAnswer({ tag, value }) {
     this.props.setAnswer({ tag, value });
   }
-  getAnswer({ tag, value }) {
+  getAnswer({ tag }) {
     return this.props.getAnswer({ tag });
   }
   componentDidMount() {
@@ -76,11 +76,11 @@ export default class Decider extends Component {
                       });
                       // filter then set the remaining to undefined
 
-                      options.map(({ value: opValue, label }) => {
-                        if (option.label !== label) {
-                          this.setAnswer(`${tag}_${option.label}`, undefined);
-                        }
-                      });
+                      options
+                        .filter(op => op !== option)
+                        .map(({ value: opValue, label }) => {
+                          this.setAnswer({ tag: `${tag}_${label}`, value: undefined });
+                        });
                     }}
                   />
                   {option.label}
