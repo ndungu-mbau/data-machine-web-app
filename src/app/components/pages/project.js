@@ -5,6 +5,7 @@ import Header from '../layouts/header';
 import Decider from '../layouts/decider';
 import _ from 'underscore';
 import swal from 'sweetalert2';
+import validate from 'validate.js';
 
 import Data from '../../services/data';
 
@@ -75,7 +76,12 @@ export default class Home extends Component {
     this.setState({ showModal: true });
   }
   async submitForm({ mission }) {
+    //Check validations before submit
+    const { answers } = this.state.mission;
+    const { validations } = this.state;
     // swal to ask if you are sure you want
+    const valid = validate(answers, validations);
+    console.log(valid);
     swal
       .fire({
         title: 'Are you sure?',
@@ -95,7 +101,16 @@ export default class Home extends Component {
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);
 
-    this.setState({ mission: data }, function() {
+    let validations = {};
+    data.pages.forEach(page => {
+      page.groups.forEach(group => {
+        group.questions.forEach(
+          q => (validations = { ...validations, [q.tag]: JSON.parse(q.validation) }),
+        );
+      });
+    });
+
+    this.setState({ mission: data, validations }, function() {
       Data.setAnswer({
         mission: this.state.mission.id,
         tag: 'startedAt',
