@@ -1,74 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="49.40723mm"
-   height="6.4177332mm"
-   viewBox="-0.2 0 49.407229 6.417733"
-   version="1.1"
-   id="svg8"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="all-white.svg">
-  <defs
-     id="defs2" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="159.00915"
-     inkscape:cy="-25.44948"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:pagecheckerboard="true"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     viewbox-x="-0.2" />
-  <metadata
-     id="metadata5">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-50.736308,-114.59776)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:GeosansLight;-inkscape-font-specification:GeosansLight;letter-spacing:0px;word-spacing:0px;fill:#fff9ff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="49.892841"
-       y="120.86309"
-       id="text817"><tspan
-         sodipodi:role="line"
-         id="tspan815"
-         x="49.892841"
-         y="120.86309"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:GeosansLight;-inkscape-font-specification:GeosansLight;fill:#fff9ff;fill-opacity:1;stroke-width:0.26458332">Braiven Datakit</tspan></text>
-  </g>
+<svg width="224.65mm" height="27.68mm" version="1.1" viewBox="0 0 224.65 27.68" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(10.535 -124.65)">
+  <text x="-13.40878" y="151.64474" fill="#ffffff" font-family="GeosansLight" font-size="37.814px" letter-spacing="0px" stroke-width=".94534" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-13.40878" y="151.64474" fill="#ffffff" font-family="GeosansLight" stroke-width=".94534">Braiven DataKit</tspan></text>
+ </g>
 </svg>

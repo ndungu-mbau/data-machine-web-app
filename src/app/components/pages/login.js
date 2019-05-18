@@ -73,7 +73,7 @@ export default class Login extends Component {
               <div>
                 <div className="mb-5 text-center">
                   <p>Login</p>
-                  <img src="./assets/media/logos/all-black.svg" alt="" />
+                  <img style={{ width: '220px' }} src="./assets/media/logos/all-black.svg" alt="" />
                 </div>
                 <span className="clearfix" />
                 {this.state.error ? (
