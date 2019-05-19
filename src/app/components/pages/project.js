@@ -81,22 +81,32 @@ export default class Home extends Component {
     const { validations } = this.state;
     // swal to ask if you are sure you want
     const valid = validate(answers, validations);
-    console.log(valid);
-    swal
-      .fire({
-        title: 'Are you sure?',
-        text:
-          'This submition might trigger some events that you might not be able to reverse, ie emails and approval/verification requests',
-        type: 'warning',
-        showCancelButton: !0,
-        confirmButtonText: 'Yes, Submit it!',
-      })
-      .then(async function(t) {
-        if (t.value) {
-          await Data.submitToServer({ mission });
-          swal.fire('Submitted!', 'Your Data has successfully been submitted.', 'success');
-        }
+
+    if (Object.entries(valid).length === 0) {
+      swal
+        .fire({
+          title: 'Are you sure?',
+          text:
+            'This submition might trigger some events that you might not be able to reverse, ie emails and approval/verification requests',
+          type: 'warning',
+          showCancelButton: !0,
+          confirmButtonText: 'Yes, Submit it!',
+        })
+        .then(async function(t) {
+          if (t.value) {
+            await Data.submitToServer({ mission });
+            swal.fire('Submitted!', 'Your Data has successfully been submitted.', 'success');
+          }
+        });
+    } else {
+      swal.fire({
+        title: 'Error',
+        text: 'Your form submission has some errors',
+        type: 'error',
+        showCancelButton: 0,
+        confirmButtonText: 'Go back',
       });
+    }
   }
   async componentDidMount() {
     var data = await Data.getMission(this.props.match.params.id);
