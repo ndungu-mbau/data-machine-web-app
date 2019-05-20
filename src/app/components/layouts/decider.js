@@ -12,8 +12,6 @@ import TimePicker from './pickers/time-picker';
 import DatePicker from './pickers/date-picker';
 import Signature from './pickers/signature.js';
 
-const $ = window.$;
-
 export default class Decider extends Component {
   setAnswer = ({ tag, value }) => {
     this.props.setAnswer({ tag, value });
@@ -21,20 +19,7 @@ export default class Decider extends Component {
   getAnswer = ({ tag }) => {
     return this.props.getAnswer({ tag });
   };
-  componentDidMount() {
-    $('#kt_datepicker_6').datepicker();
-    $('#kt_datetimepicker_7').datetimepicker({
-      format: 'hh:ii',
-      showMeridian: !0,
-      todayHighlight: !0,
-      autoclose: !0,
-      startView: 1,
-      minView: 0,
-      maxView: 1,
-      forceParse: 0,
-      pickerPosition: 'bottom-left',
-    });
-  }
+
   render() {
     const { type, placeholder, options, tag, sentences } = this.props.question.question;
 
