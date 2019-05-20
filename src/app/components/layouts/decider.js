@@ -47,7 +47,13 @@ export default class Decider extends Component {
 
     if (type === 'multipleSelect')
       return (
-        <MultipleSelect tag={tag} options={options} setAnswer={this.setAnswer} invalid={invalid} />
+        <MultipleSelect
+          tag={tag}
+          options={options}
+          setAnswer={this.setAnswer}
+          getAnswer={this.getAnswer}
+          invalid={invalid}
+        />
       );
 
     if (type === 'GpsCoordinates') return <GpsCoordinates invalid={invalid} />;

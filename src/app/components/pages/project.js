@@ -83,6 +83,8 @@ export default class Home extends Component {
     // swal to ask if you are sure you want
     const invalid = validate(answers, validations);
 
+    console.log(invalid);
+
     this.setState({ invalid });
 
     if (!invalid) {
