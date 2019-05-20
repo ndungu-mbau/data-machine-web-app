@@ -23,10 +23,9 @@ class File extends Component {
       url: `${url}/upload`,
       method: 'post',
       data,
-      onUploadProgress: console.log,
     });
 
-    this.props.setAnswer({ tag: this.props.question.question.tag, value: uri });
+    this.props.setAnswer({ tag: this.props.tag, value: uri });
   };
 
   render = () => {

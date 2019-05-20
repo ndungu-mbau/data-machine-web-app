@@ -16,7 +16,7 @@ const getTag = (parentTag, { questionnaire }) => {
       group.questions.map(question => {
         if (question.tag === parentTag) return (parent = question);
 
-        if (!question.options) return;
+        if (!question.options) return undefined;
 
         return question.options.map(option => {
           // console.log(question.tag + "_" + option.label, parentTag)
@@ -25,7 +25,7 @@ const getTag = (parentTag, { questionnaire }) => {
               return (parent = question);
             }
 
-            return;
+            return undefined;
           }
 
           if (question.tag + '_' + option.label === parentTag) {
@@ -77,12 +77,15 @@ export default class Home extends Component {
   }
   async submitForm({ mission }) {
     //Check validations before submit
+    //console.log({ mission: this.state.mission });
     const { answers } = this.state.mission;
     const { validations } = this.state;
     // swal to ask if you are sure you want
     const valid = validate(answers, validations);
 
-    if (Object.entries(valid).length === 0) {
+    this.setState({ valid });
+
+    if (!valid) {
       swal
         .fire({
           title: 'Are you sure?',
@@ -106,6 +109,8 @@ export default class Home extends Component {
         showCancelButton: 0,
         confirmButtonText: 'Go back',
       });
+
+      this.setState({ valid });
     }
   }
   async componentDidMount() {
@@ -120,23 +125,33 @@ export default class Home extends Component {
       });
     });
 
-    this.setState({ mission: data, validations }, function() {
-      Data.setAnswer({
-        mission: this.state.mission.id,
-        tag: 'startedAt',
-        value: new Date().toISOString(),
-      });
-    });
+    this.setState({ mission: data, validations });
   }
   async componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       var data = await Data.getMission(this.props.match.params.id);
 
-      this.setState({ mission: data });
+      let validations = {};
+      data.pages.forEach(page => {
+        page.groups.forEach(group => {
+          group.questions.forEach(
+            q => (validations = { ...validations, [q.tag]: JSON.parse(q.validation) }),
+          );
+        });
+      });
+
+      Data.setAnswer({
+        mission: data.id,
+        tag: 'startedAt',
+        value: new Date().toISOString(),
+      });
+
+      this.setState({ mission: data, validations });
     }
   }
   render() {
     const _this = this;
+    const { valid } = this.state;
     return (
       <div className="k-grid k-grid--hor k-grid--root">
         <div className="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page">
@@ -188,13 +203,14 @@ export default class Home extends Component {
                                 ) {
                                   // since we are not supposed to show this tag, we be nice and remove its unswer from the storage
                                   //  so clean the slate for the children
-                                  return;
+                                  return null;
                                 }
                               }
 
                               return (
                                 <span key={question.id}>
                                   <Decider
+                                    valid={valid && valid[question.tag]}
                                     question={{ question }}
                                     getAnswer={({ tag }) => {
                                       return Data.getAnswer({

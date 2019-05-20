@@ -1,13 +1,60 @@
 import React, { Component } from 'react';
-const $ = window.$;
 
-class TimePicker extends Component {
-  componentDidMount() {
-    $('#kt_datepicker_6').datepicker();
+import Modal from '../modals/create_signature';
+
+class SignaturePicker extends Component {
+  state = {
+    showModal: false,
+  };
+
+  handleHideModal() {
+    this.setState({ showModal: false });
   }
+
+  handleShowModal() {
+    this.setState({ showModal: true });
+  }
+
   render() {
-    return <div id="k_header" className="k-header k-grid__item k-header--fixed" />;
+    const { tag, getAnswer, setAnswer } = this.props;
+    return (
+      <div className="row">
+        <div className="col-lg-2 text-center">
+          <i
+            className="flaticon2-edit-interface-symbol-of-pencil-tool"
+            style={{ fontSize: '50px' }}
+          />
+        </div>
+        <div className="col-lg-8 text-center">
+          {getAnswer({
+            tag,
+          }) ? (
+            <img
+              alt="signature"
+              src={getAnswer({
+                tag,
+              })}
+            />
+          ) : null}
+          <br />
+          <button className="btn btn-default btn-block" onClick={() => this.handleShowModal()}>
+            Create Signature
+          </button>
+          {this.state.showModal === true ? (
+            <Modal
+              handleHideModal={() => this.handleHideModal()}
+              setAnswer={({ value }) => {
+                setAnswer({
+                  tag,
+                  value,
+                });
+              }}
+            />
+          ) : null}
+        </div>
+      </div>
+    );
   }
 }
 
-export default TimePicker;
+export default SignaturePicker;
