@@ -12,3 +12,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.k-radio>input:checked~span {
+  border: 1px solid #000000;
+}
+
+.k-radio>span:after {
+  border: solid #000000;
+  background: #000000;
+}
+
+.k-radio>span:before {
+  border: solid #000000;
+  background: #000000;
+}
+
+/*checkbox tings*/
+.k-checkbox>input:checked~span {
+  border: 1px solid #000000;
+}
+
+.k-checkbox>span:after {
+  border: solid #000000;
+}
+
+.k-checkbox>span:before {
+  border: solid #000000;
+  background: #000000;
+}
