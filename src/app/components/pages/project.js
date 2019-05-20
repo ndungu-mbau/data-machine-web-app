@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-is-invalid */
 import React, { Component } from 'react';
 import Sidebar from '../layouts/sidebar';
 import Header from '../layouts/header';
@@ -81,11 +81,11 @@ export default class Home extends Component {
     const { answers } = this.state.mission;
     const { validations } = this.state;
     // swal to ask if you are sure you want
-    const valid = validate(answers, validations);
+    const invalid = validate(answers, validations);
 
-    this.setState({ valid });
+    this.setState({ invalid });
 
-    if (!valid) {
+    if (!invalid) {
       swal
         .fire({
           title: 'Are you sure?',
@@ -110,7 +110,7 @@ export default class Home extends Component {
         confirmButtonText: 'Go back',
       });
 
-      this.setState({ valid });
+      this.setState({ invalid });
     }
   }
   async componentDidMount() {
@@ -151,7 +151,7 @@ export default class Home extends Component {
   }
   render() {
     const _this = this;
-    const { valid } = this.state;
+    const { invalid } = this.state;
     return (
       <div className="k-grid k-grid--hor k-grid--root">
         <div className="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page">
@@ -210,7 +210,7 @@ export default class Home extends Component {
                               return (
                                 <span key={question.id}>
                                   <Decider
-                                    valid={valid && valid[question.tag]}
+                                    invalid={invalid && invalid[question.tag]}
                                     question={{ question }}
                                     getAnswer={({ tag }) => {
                                       return Data.getAnswer({
