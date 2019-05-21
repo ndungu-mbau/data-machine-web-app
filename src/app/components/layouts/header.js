@@ -4,6 +4,7 @@ import Mobileheader from '../layouts/mobileHeader';
 import { withRouter } from 'react-router-dom';
 
 const KLayout = window.KLayout;
+@withRouter
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -92,4 +93,4 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+export default Header;

@@ -4,6 +4,7 @@ import Data from '../../services/data';
 
 import { withRouter, Link } from 'react-router-dom';
 
+@withRouter
 class Sidebar extends Component {
   constructor(props) {
     super(props);
@@ -104,4 +105,4 @@ class Sidebar extends Component {
 
 //Component
 
-export default withRouter(Sidebar);
+export default Sidebar;
