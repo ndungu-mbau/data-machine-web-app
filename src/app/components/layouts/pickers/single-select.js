@@ -26,7 +26,7 @@ class SingleSelect extends Component {
 
                     options
                       .filter(op => op !== option)
-                      .map(({ value: opValue, label }) => {
+                      .forEach(({ value: opValue, label }) => {
                         setAnswer({ tag: `${tag}_${label}`, value: undefined });
                       });
                   }}
