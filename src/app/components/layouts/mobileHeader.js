@@ -19,7 +19,7 @@ class MobileHeader extends Component {
       <div id="k_header_mobile" className="k-header-mobile k-header-mobile--fixed">
         <div className="k-header-mobile__logo">
           <Link to="/">
-            <img style={{ height: '20px' }} alt="Logo" src="/assets/media/logos/v4-white.svg" />
+            <img style={{ height: '20px' }} alt="Logo" src="/assets/media/logos/all-white.png" />
           </Link>
         </div>
         <div className="k-header-mobile__toolbar">

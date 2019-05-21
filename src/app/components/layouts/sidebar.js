@@ -39,7 +39,7 @@ class Sidebar extends Component {
         >
           <div className="k-aside__brand-logo">
             <Link to="/">
-              <img alt="Logo" src="/assets/media/logos/v4-white.svg" style={{ height: '20px' }} />
+              <img alt="Logo" src="/assets/media/logos/all-white.png" style={{ height: '20px' }} />
             </Link>
           </div>
           <div className="k-aside__brand-tools">
