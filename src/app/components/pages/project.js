@@ -104,15 +104,15 @@ export default class Home extends Component {
           }
         });
     } else {
-      swal.fire({
-        title: 'Error',
-        text: 'Your form submission has some errors',
-        type: 'error',
-        showCancelButton: 0,
-        confirmButtonText: 'Go back',
-      });
-
       this.setState({ invalid });
+
+      const key = Object.keys(invalid)[0];
+      const el = document.getElementById(key);
+
+      console.log({ key, el });
+      el.scrollIntoView({
+        behavior: 'smooth',
+      });
     }
   }
   async componentDidMount() {
@@ -151,6 +151,27 @@ export default class Home extends Component {
       this.setState({ mission: data, validations });
     }
   }
+
+  validateOnBlur = ({ tag }) => {
+    const answer = Data.getAnswer({ mission: this.state.mission.id, tag });
+    const { validations } = this.state;
+
+    const obj = { [tag]: answer };
+
+    console.log({ obj, validator: validations[tag] });
+
+    const isValid = validate({ [tag]: answer }, { [tag]: validations[tag] });
+
+    this.setState(prevState => ({
+      ...prevState,
+      invalid: {
+        ...prevState.invalid,
+        [tag]: isValid,
+      },
+    }));
+
+    return isValid;
+  };
   render() {
     const _this = this;
     const { invalid } = this.state;
@@ -213,6 +234,7 @@ export default class Home extends Component {
                                 <span key={question.id}>
                                   <Decider
                                     invalid={invalid && invalid[question.tag]}
+                                    validateOnBlur={this.validateOnBlur}
                                     question={{ question }}
                                     getAnswer={({ tag }) => {
                                       return Data.getAnswer({

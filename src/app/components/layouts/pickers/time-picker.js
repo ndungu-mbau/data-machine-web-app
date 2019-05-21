@@ -16,8 +16,9 @@ class TimePicker extends Component {
     });
   }
   render() {
+    const { invalid, tag } = this.props;
     return (
-      <div className="row">
+      <div className="row" id={tag}>
         <div className="col-lg-2 text-center">
           <i className="flaticon-clock-1 k-font-info" style={{ fontSize: '50px' }} />
         </div>
@@ -26,7 +27,7 @@ class TimePicker extends Component {
           <div className="input-group date">
             <input
               type="text"
-              className="form-control"
+              className={`form-control ${invalid && 'is-invalid'}`}
               placeholder="Select time"
               id="kt_datetimepicker_7"
             />

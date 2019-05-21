@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 class Likert extends Component {
   render() {
-    const { options, sentences } = this.props;
+    const { options, sentences, invalid, tag } = this.props;
     return (
-      <div className="row">
+      <div className="row" id={tag}>
         <table className="table">
           <thead>
             <tr>
@@ -23,7 +23,11 @@ class Likert extends Component {
                     return (
                       <td key={option.label + option.value}>
                         <label className="k-radio">
-                          <input name={sentences.sentenceLabel} type="radio" />
+                          <input
+                            name={sentences.sentenceLabel}
+                            type="radio"
+                            className={invalid && 'is-invalid'}
+                          />
                           <span />
                         </label>
                       </td>
@@ -34,6 +38,12 @@ class Likert extends Component {
             })}
           </tbody>
         </table>
+        {invalid &&
+          invalid.map(invalidMessage => (
+            <div key={invalidMessage} class="invalid-feedback" style={{ display: 'block' }}>
+              {invalidMessage}
+            </div>
+          ))}
       </div>
     );
   }

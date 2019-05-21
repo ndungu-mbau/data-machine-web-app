@@ -22,13 +22,19 @@ export default class Decider extends Component {
 
   render() {
     const { type, placeholder, options, tag, sentences } = this.props.question.question;
-    const { invalid } = this.props;
+    const { invalid, validateOnBlur } = this.props;
 
     if (type === 'instruction') return <Instruction placeholder={placeholder} />;
 
     if (type === 'singleSelect')
       return (
-        <SingleSelect tag={tag} options={options} setAnswer={this.setAnswer} invalid={invalid} />
+        <SingleSelect
+          tag={tag}
+          options={options}
+          setAnswer={this.setAnswer}
+          invalidProp={invalid}
+          validateOnBlur={validateOnBlur}
+        />
       );
 
     if (type === 'input')
@@ -38,12 +44,21 @@ export default class Decider extends Component {
           placeholder={placeholder}
           setAnswer={this.setAnswer}
           getAnswer={this.getAnswer}
-          invalid={invalid}
+          invalidProp={invalid}
+          validateOnBlur={validateOnBlur}
         />
       );
 
     if (type === 'likert')
-      return <Likert options={options} sentences={sentences} invalid={invalid} />;
+      return (
+        <Likert
+          options={options}
+          sentences={sentences}
+          invalid={invalid}
+          validateOnBlur={validateOnBlur}
+          tag={tag}
+        />
+      );
 
     if (type === 'multipleSelect')
       return (
@@ -52,23 +67,42 @@ export default class Decider extends Component {
           options={options}
           setAnswer={this.setAnswer}
           getAnswer={this.getAnswer}
-          invalid={invalid}
+          invalidProp={invalid}
+          validateOnBlur={validateOnBlur}
         />
       );
 
-    if (type === 'GpsCoordinates') return <GpsCoordinates invalid={invalid} />;
+    if (type === 'GpsCoordinates')
+      return <GpsCoordinates invalid={invalid} validateOnBlur={validateOnBlur} />;
 
-    if (type === 'queryQuestion') return <QueryQuestion invalid={invalid} />;
+    if (type === 'queryQuestion')
+      return <QueryQuestion invalid={invalid} validateOnBlur={validateOnBlur} />;
 
     if (type === 'file')
-      return <File type="file" tag={tag} setAnswer={this.setAnswer} invalid={invalid} />;
+      return (
+        <File
+          type="file"
+          tag={tag}
+          setAnswer={this.setAnswer}
+          invalid={invalid}
+          validateOnBlur={validateOnBlur}
+        />
+      );
 
     if (type === 'cameraImage')
-      return <File type="cameraImage" tag={tag} setAnswer={this.setAnswer} invalid={invalid} />;
+      return (
+        <File
+          type="cameraImage"
+          tag={tag}
+          setAnswer={this.setAnswer}
+          invalid={invalid}
+          validateOnBlur={validateOnBlur}
+        />
+      );
 
-    if (type === 'time') return <TimePicker invalid={invalid} />;
+    if (type === 'time') return <TimePicker invalid={invalid} validateOnBlur={validateOnBlur} />;
 
-    if (type === 'date') return <DatePicker invalid={invalid} />;
+    if (type === 'date') return <DatePicker invalid={invalid} validateOnBlur={validateOnBlur} />;
 
     if (type === 'signature')
       return (
@@ -77,6 +111,7 @@ export default class Decider extends Component {
           getAnswer={this.getAnswer}
           setAnswer={this.setAnswer}
           invalid={invalid}
+          validateOnBlur={validateOnBlur}
         />
       );
 

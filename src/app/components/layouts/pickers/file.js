@@ -29,21 +29,40 @@ class File extends Component {
   };
 
   render = () => {
+    const { validateOnBlur, tag } = this.props;
+    const { invalid } = this.state;
     return (
-      <div className="row">
-        <div className="col-lg-2 text-center">
-          <i
-            className={`flaticon-${
-              this.props.type === 'file' ? 'attachment' : 'photo-camera'
-            } k-font-info`}
-            style={{ fontSize: '50px' }}
-          />
+      <>
+        <div className="row" id={tag}>
+          <div className="col-lg-2 text-center">
+            <i
+              className={`flaticon-${
+                this.props.type === 'file' ? 'attachment' : 'photo-camera'
+              } k-font-info`}
+              style={{ fontSize: '50px' }}
+            />
+          </div>
+          <div className="col-lg-8 col-md-9 col-sm-12">
+            <br />
+            <input
+              placeholder=" "
+              type="file"
+              className={`form-control ${invalid && 'is-invalid'}`}
+              onChange={this.onChange}
+              onBlur={e => {
+                const invalid = validateOnBlur({ tag: tag });
+                this.setState({ invalid });
+              }}
+            />
+          </div>
         </div>
-        <div className="col-lg-8 col-md-9 col-sm-12">
-          <br />
-          <input placeholder=" " type="file" className="form-control" onChange={this.onChange} />
-        </div>
-      </div>
+        {invalid &&
+          invalid.map(invalidMessage => (
+            <div class="invalid-feedback" style={{ display: 'block' }}>
+              {invalidMessage}
+            </div>
+          ))}
+      </>
     );
   };
 }

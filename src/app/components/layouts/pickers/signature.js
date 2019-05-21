@@ -16,9 +16,9 @@ class SignaturePicker extends Component {
   }
 
   render() {
-    const { tag, getAnswer, setAnswer } = this.props;
+    const { tag, getAnswer, setAnswer, invalid } = this.props;
     return (
-      <div className="row">
+      <div className="row" id={tag}>
         <div className="col-lg-2 text-center">
           <i
             className="flaticon2-edit-interface-symbol-of-pencil-tool"
@@ -31,6 +31,7 @@ class SignaturePicker extends Component {
           }) ? (
             <img
               alt="signature"
+              className={invalid && 'is-invalid'}
               src={getAnswer({
                 tag,
               })}
