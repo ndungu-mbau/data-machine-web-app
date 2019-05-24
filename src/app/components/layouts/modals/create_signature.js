@@ -1,20 +1,17 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import SignatureCanvas from "react-signature-canvas";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import SignatureCanvas from 'react-signature-canvas';
 
 const $ = window.$;
 
 class Modal extends Component {
   state = {
     height: 400,
-    width: 700
+    width: 700,
   };
   componentDidMount() {
-    $(ReactDOM.findDOMNode(this)).modal("show");
-    $(ReactDOM.findDOMNode(this)).on(
-      "hidden.bs.modal",
-      this.props.handleHideModal
-    );
+    $(ReactDOM.findDOMNode(this)).modal('show');
+    $(ReactDOM.findDOMNode(this)).on('hidden.bs.modal', this.props.handleHideModal);
 
     // var canvasParent = document.getElementById("modal-body");
 
@@ -31,12 +28,7 @@ class Modal extends Component {
             <div>
               <div className="modal-header">
                 <h5 className="modal-title">Please Sign below</h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -47,7 +39,7 @@ class Modal extends Component {
                     flex: 1,
                     width: this.state.width,
                     height: this.state.height,
-                    className: "sigCanvas"
+                    className: 'sigCanvas',
                   }}
                   ref={ref => {
                     this.sigCanvas = ref;
@@ -56,11 +48,7 @@ class Modal extends Component {
               </div>
             </div>
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-default"
-                data-dismiss="modal"
-              >
+              <button type="button" className="btn btn-default" data-dismiss="modal">
                 Close
               </button>
               <button
@@ -68,7 +56,7 @@ class Modal extends Component {
                 className="btn btn-primary"
                 onClick={() => {
                   this.props.setAnswer({ value: this.sigCanvas.toDataURL() });
-                  $(ReactDOM.findDOMNode(this)).modal("hide");
+                  $(ReactDOM.findDOMNode(this)).modal('hide');
                 }}
               >
                 Save changes
