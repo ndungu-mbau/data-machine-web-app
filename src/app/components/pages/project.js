@@ -83,8 +83,6 @@ export default class Home extends Component {
     // swal to ask if you are sure you want
     const invalid = validate(answers, validations);
 
-    console.log(invalid);
-
     this.setState({ invalid });
 
     if (!invalid) {
@@ -100,6 +98,7 @@ export default class Home extends Component {
         .then(async function(t) {
           if (t.value) {
             await Data.submitToServer({ mission });
+            window.location.reload(true);
             swal.fire('Submitted!', 'Your Data has successfully been submitted.', 'success');
           }
         });
