@@ -9,6 +9,8 @@ import validate from 'validate.js';
 
 import Data from '../../services/data';
 
+import { SkeletonLineShort, QuestionLayout } from '../layouts/loader';
+
 const getTag = (parentTag, { questionnaire }) => {
   let parent = null;
   questionnaire.pages.map(page => {
@@ -67,6 +69,7 @@ export default class Home extends Component {
         pages: [],
       },
       showModal: false,
+      loading: true,
     };
   }
   handleHideModal() {
@@ -127,9 +130,11 @@ export default class Home extends Component {
     });
 
     this.setState({ mission: data, validations });
+    //setTimeout(() => this.setState({ loading: false }), 2000);
   }
   async componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.setState({ loading: true });
       var data = await Data.getMission(this.props.match.params.id);
 
       let validations = {};
@@ -148,6 +153,7 @@ export default class Home extends Component {
       });
 
       this.setState({ mission: data, validations });
+      //setTimeout(() => this.setState({ loading: false }), 2000);
     }
   }
 
@@ -173,118 +179,128 @@ export default class Home extends Component {
   };
   render() {
     const _this = this;
-    const { invalid } = this.state;
+    const { invalid, loading } = this.state;
+
     return (
       <div className="k-grid k-grid--hor k-grid--root">
         <div className="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page">
           <button id="k_aside_close_btn" className="k-aside-close">
             <i className="la la-close" />
           </button>
-          <Sidebar />
+          <Sidebar loading={loading} />
           <div className="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper">
             <Header />
             <div className="k-content k-grid__item k-grid__item--fluid k-grid k-grid--hor">
               <div className="row">
                 <div className="col-12 col-lg-8 col-md-10 col-sm-12">
                   <div className="k-portlet">
-                    <div className="k-portlet__head">
-                      <div className="k-portlet__head-label">
-                        <h3 className="k-portlet__head-title">{this.state.mission.name}</h3>
-                      </div>
-                    </div>
-                    <div className="k-portlet__body">
-                      <div className="k-portlet__content">
-                        {this.state.mission.pages.map(page => {
-                          return _.sortBy(page.groups, 'name').map(group => {
-                            let questionsOrdered = [];
-
-                            if (this.state.mission.order) {
-                              group.questions.map(
-                                q => (questionsOrdered[this.state.mission.order.indexOf(q.id)] = q),
-                              );
-                            } else {
-                              questionsOrdered = _.sortBy(group.questions, 'position');
-                            }
-
-                            // // filter to spread to get more natural positions and remove empty spaces
-                            const questionsCleaned = [...questionsOrdered.filter(q => q)];
-
-                            return questionsCleaned.map(question => {
-                              if (question.conditional) {
-                                // console.log(question,ShouldShow(question.conditional))
-                                if (
-                                  !ShouldShow(question.conditional, {
-                                    getValue: parentTag => {
-                                      return Data.getAnswer({
-                                        mission: this.state.mission.id,
-                                        tag: parentTag,
-                                      });
-                                    },
-                                    questionnaire: this.state.mission,
-                                  })
-                                ) {
-                                  // since we are not supposed to show this tag, we be nice and remove its unswer from the storage
-                                  //  so clean the slate for the children
-                                  return null;
-                                }
-                              }
-
-                              return (
-                                <span key={question.id}>
-                                  <Decider
-                                    invalid={invalid && invalid[question.tag]}
-                                    validateOnBlur={this.validateOnBlur}
-                                    question={{ question }}
-                                    getAnswer={({ tag }) => {
-                                      return Data.getAnswer({
-                                        mission: _this.state.mission.id,
-                                        tag,
-                                      });
-                                    }}
-                                    setAnswer={({ tag, value }) => {
-                                      Data.setAnswer({
-                                        mission: this.state.mission.id,
-                                        tag,
-                                        value,
-                                      });
-
-                                      if (this.state[_this.state.mission.id]) {
-                                        this.setState({
-                                          [this.state.mission.id]: {
-                                            ...this.state[_this.state.mission.id],
-                                            [tag]: value,
-                                          },
-                                        });
-                                      } else {
-                                        this.setState({
-                                          [this.state.mission.id]: { tag, value },
-                                        });
-                                      }
-                                    }}
-                                  />
-                                  <br />
-                                </span>
-                              );
-                            });
-                          });
-                        })}
-                      </div>
-                    </div>
-                    <div className="k-portlet__foot">
-                      <div className="row">
-                        <div className="col-lg-12">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-brand float-right"
-                            onClick={() => {
-                              this.submitForm({ mission: this.state.mission.id });
-                            }}
-                          >
-                            Submit
-                          </button>
+                    {loading ? null : (
+                      <div className="k-portlet__head">
+                        <div className="k-portlet__head-label">
+                          <h3 className="k-portlet__head-title">{this.state.mission.name}</h3>
                         </div>
                       </div>
+                    )}
+                    <div className="k-portlet__body">
+                      <div className="k-portlet__content">
+                        {loading ? (
+                          <QuestionLayout />
+                        ) : (
+                          this.state.mission.pages.map(page => {
+                            return _.sortBy(page.groups, 'name').map(group => {
+                              let questionsOrdered = [];
+
+                              if (this.state.mission.order) {
+                                group.questions.map(
+                                  q =>
+                                    (questionsOrdered[this.state.mission.order.indexOf(q.id)] = q),
+                                );
+                              } else {
+                                questionsOrdered = _.sortBy(group.questions, 'position');
+                              }
+
+                              // // filter to spread to get more natural positions and remove empty spaces
+                              const questionsCleaned = [...questionsOrdered.filter(q => q)];
+
+                              return questionsCleaned.map(question => {
+                                if (question.conditional) {
+                                  // console.log(question,ShouldShow(question.conditional))
+                                  if (
+                                    !ShouldShow(question.conditional, {
+                                      getValue: parentTag => {
+                                        return Data.getAnswer({
+                                          mission: this.state.mission.id,
+                                          tag: parentTag,
+                                        });
+                                      },
+                                      questionnaire: this.state.mission,
+                                    })
+                                  ) {
+                                    // since we are not supposed to show this tag, we be nice and remove its unswer from the storage
+                                    //  so clean the slate for the children
+                                    return null;
+                                  }
+                                }
+
+                                return (
+                                  <span key={question.id}>
+                                    <Decider
+                                      invalid={invalid && invalid[question.tag]}
+                                      validateOnBlur={this.validateOnBlur}
+                                      question={{ question }}
+                                      getAnswer={({ tag }) => {
+                                        return Data.getAnswer({
+                                          mission: _this.state.mission.id,
+                                          tag,
+                                        });
+                                      }}
+                                      setAnswer={({ tag, value }) => {
+                                        Data.setAnswer({
+                                          mission: this.state.mission.id,
+                                          tag,
+                                          value,
+                                        });
+
+                                        if (this.state[_this.state.mission.id]) {
+                                          this.setState({
+                                            [this.state.mission.id]: {
+                                              ...this.state[_this.state.mission.id],
+                                              [tag]: value,
+                                            },
+                                          });
+                                        } else {
+                                          this.setState({
+                                            [this.state.mission.id]: { tag, value },
+                                          });
+                                        }
+                                      }}
+                                    />
+                                    <br />
+                                  </span>
+                                );
+                              });
+                            });
+                          })
+                        )}
+                      </div>
                     </div>
+                    {loading ? null : (
+                      <div className="k-portlet__foot">
+                        <div className="row">
+                          <div className="col-lg-12">
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-brand float-right"
+                              onClick={() => {
+                                this.submitForm({ mission: this.state.mission.id });
+                              }}
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

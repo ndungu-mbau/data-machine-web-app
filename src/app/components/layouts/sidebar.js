@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import Data from '../../services/data';
+import { SkeletonLineShort } from './loader';
 
 import { withRouter, Link } from 'react-router-dom';
 
@@ -69,26 +70,34 @@ class Sidebar extends Component {
                 <h4 className="k-menu__section-text">Projects</h4>
                 <i className="k-menu__section-icon flaticon-more-v2" />
               </li>
-              {this.state.missions.map(mission => {
-                return (
-                  <li
-                    key={mission.questionnaire.id}
-                    aria-haspopup="true"
-                    className={`k-menu__item ${
-                      mission.questionnaire.id === this.props.match.params.id
-                        ? 'k-menu__item--active'
-                        : ''
-                    }`}
-                  >
-                    <Link to={`/project/${mission.questionnaire.id}`} className="k-menu__link">
-                      <i className="k-menu__link-bullet k-menu__link-bullet--dot">
-                        <span />
-                      </i>
-                      <span className="k-menu__link-text">{mission.name}</span>
-                    </Link>
-                  </li>
-                );
-              })}
+              {this.props.loading ? (
+                <>
+                  <SkeletonLineShort width="80%" />
+                  <SkeletonLineShort width="80%" />
+                  <SkeletonLineShort width="80%" />
+                </>
+              ) : (
+                this.state.missions.map(mission => {
+                  return (
+                    <li
+                      key={mission.questionnaire.id}
+                      aria-haspopup="true"
+                      className={`k-menu__item ${
+                        mission.questionnaire.id === this.props.match.params.id
+                          ? 'k-menu__item--active'
+                          : ''
+                      }`}
+                    >
+                      <Link to={`/project/${mission.questionnaire.id}`} className="k-menu__link">
+                        <i className="k-menu__link-bullet k-menu__link-bullet--dot">
+                          <span />
+                        </i>
+                        <span className="k-menu__link-text">{mission.name}</span>
+                      </Link>
+                    </li>
+                  );
+                })
+              )}
             </ul>
             <div className="ps__rail-x" style={{ left: '0px', bottom: '0px' }}>
               <div className="ps__thumb-x" tabIndex={0} style={{ left: '0px', width: '0px' }} />
