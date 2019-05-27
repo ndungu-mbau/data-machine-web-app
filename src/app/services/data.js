@@ -86,8 +86,8 @@ var Data = (function() {
         missions = projects;
 
         missions.map(mission => {
-          mission.answers = {};
-          missionsMap[mission.id] = mission.questionnaire;
+          mission.questionnaire.answers = {};
+          missionsMap[mission.questionnaire.id] = mission.questionnaire;
 
           missionsQuestionnaireMap[mission.questionnaire.id] = mission.id;
         });
