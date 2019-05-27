@@ -13,12 +13,13 @@ class Sidebar extends Component {
     this.state = {
       missions: [],
       firstName: JSON.parse(localStorage.getItem('user')),
+      loading: true,
     };
   }
   async componentDidMount() {
     var data = await Data.getMissions();
 
-    this.setState({ missions: data });
+    this.setState({ missions: data, loading: false });
 
     // check route and route to first project if we are on home and not showing any project
     // later this can be replaced with settings on the org
@@ -70,7 +71,7 @@ class Sidebar extends Component {
                 <h4 className="k-menu__section-text">Projects</h4>
                 <i className="k-menu__section-icon flaticon-more-v2" />
               </li>
-              {this.props.loading ? (
+              {this.state.loading ? (
                 <>
                   <SkeletonLineShort width="80%" />
                   <SkeletonLineShort width="80%" />
