@@ -129,8 +129,7 @@ export default class Home extends Component {
       });
     });
 
-    this.setState({ mission: data, validations });
-    //setTimeout(() => this.setState({ loading: false }), 2000);
+    this.setState({ mission: data, validations, loading: false });
   }
   async componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
@@ -152,8 +151,7 @@ export default class Home extends Component {
         value: new Date().toISOString(),
       });
 
-      this.setState({ mission: data, validations });
-      //setTimeout(() => this.setState({ loading: false }), 2000);
+      this.setState({ mission: data, validations, loading: false });
     }
   }
 
