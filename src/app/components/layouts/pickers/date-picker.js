@@ -29,7 +29,7 @@ class DatePicker extends Component {
           </div>
         </div>
         {invalid &&
-          invalid.map(invalidMessage => (
+          Object.values(invalid).map(invalidMessage => (
             <div class="invalid-feedback" style={{ display: 'block' }}>
               {invalidMessage}
             </div>

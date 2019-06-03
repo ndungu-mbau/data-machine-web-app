@@ -53,7 +53,7 @@ class SingleSelect extends Component {
           </div>
         </span>
         {invalid &&
-          invalid.map(invalidMessage => (
+          Object.values(invalid).map(invalidMessage => (
             <div key={invalidMessage} class="invalid-feedback" style={{ display: 'block' }}>
               {invalidMessage}
             </div>
