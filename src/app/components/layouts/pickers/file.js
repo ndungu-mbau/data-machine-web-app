@@ -9,6 +9,12 @@ class File extends Component {
     file: '',
   };
 
+  static getDerivedStateFromProps(props) {
+    return {
+      invalid: props.invalid,
+    };
+  }
+
   onChange = async e => {
     e.preventDefault();
     e.persist();
@@ -47,7 +53,7 @@ class File extends Component {
             <input
               placeholder=" "
               type="file"
-              className={`form-control ${invalid && 'is-invalid'}`}
+              className={`form-control ${invalid === undefined ? '' : 'is-invalid'}`}
               onChange={this.onChange}
               onBlur={e => {
                 const invalid = validateOnBlur({ tag: tag });
@@ -56,12 +62,13 @@ class File extends Component {
             />
           </div>
         </div>
-        {invalid &&
-          invalid.map(invalidMessage => (
-            <div class="invalid-feedback" style={{ display: 'block' }}>
-              {invalidMessage}
-            </div>
-          ))}
+        {invalid === undefined
+          ? null
+          : Object.values(invalid).map(invalidMessage => (
+              <div class="invalid-feedback" style={{ display: 'block' }}>
+                {invalidMessage}
+              </div>
+            ))}
       </>
     );
   };
