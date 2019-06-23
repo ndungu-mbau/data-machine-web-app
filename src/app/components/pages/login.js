@@ -62,7 +62,7 @@ export default class Login extends Component {
         />
         <link
           rel="stylesheet"
-          href="https://preview.webpixels.io/purpose-website-ui-kit-v2.0.0/assets/css/purpose.css"
+          href="https://preview.webpixels.io/purpose-website-ui-kit-v2.0.1/assets/css/purpose.css"
           id="stylesheet"
         />
       </Helmet>,
