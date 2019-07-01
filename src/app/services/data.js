@@ -35,6 +35,11 @@ var Data = (function() {
               teams {
                 id
                 name
+                dashboards{
+                  id,
+                  name,
+                  url
+                }
                 projects {
                   id
                   name

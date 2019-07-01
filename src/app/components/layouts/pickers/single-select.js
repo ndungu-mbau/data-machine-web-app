@@ -28,7 +28,7 @@ class SingleSelect extends Component {
                       // set this one as true
                       setAnswer({
                         tag: `${tag}`,
-                        value: `${tag}_${option.label}`,
+                        value: `${option.label}`,
                       });
                       setAnswer({
                         tag: `${tag}_${option.label}`,
