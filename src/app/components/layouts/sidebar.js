@@ -100,6 +100,49 @@ class Sidebar extends Component {
                 })
               )}
             </ul>
+
+            <ul className="k-menu__nav">
+              <li className="k-menu__section">
+                <h4 className="k-menu__section-text">Dashboards</h4>
+                <i className="k-menu__section-icon flaticon-more-v2" />
+              </li>
+              {this.state.loading ? (
+                <>
+                  <SkeletonLineShort width="80%" />
+                  <SkeletonLineShort width="80%" />
+                  <SkeletonLineShort width="80%" />
+                </>
+              ) : (
+                <li
+                  // key={mission.questionnaire.id}
+                  // aria-haspopup="true"
+                  className={`k-menu__item`}
+                >
+                  <Link to={`/dashboard/1`} className="k-menu__link">
+                    <i className="k-menu__link-bullet k-menu__link-bullet--dot">
+                      <span />
+                    </i>
+                    <span className="k-menu__link-text">Dashboard One</span>
+                  </Link>
+                </li>
+                // this.state.missions.map(mission => {
+                //   return (
+                //     <li
+                //       key={mission.questionnaire.id}
+                //       aria-haspopup="true"
+                //       className={`k-menu__item ${
+                //         mission.questionnaire.id === this.props.match.params.id
+                //           ? 'k-menu__item--active'
+                //           : ''
+                //       }`}
+                //     >
+
+                //     </li>
+                //   );
+                // })
+              )}
+            </ul>
+
             <div className="ps__rail-x" style={{ left: '0px', bottom: '0px' }}>
               <div className="ps__thumb-x" tabIndex={0} style={{ left: '0px', width: '0px' }} />
             </div>

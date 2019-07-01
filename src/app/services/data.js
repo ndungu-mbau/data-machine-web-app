@@ -1,4 +1,4 @@
-import { graphQuery, requestBackend } from '../requestToolbox';
+import { graphQuery, requestBackend, getBackend } from '../requestToolbox';
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -199,6 +199,10 @@ var Data = (function() {
       });
 
       return requestBackend(missionsMap[mission].answers, '/submision');
+    },
+    async getDashboardUrl(id) {
+      const { data } = await getBackend(`/embed_metabase/${id}`);
+      return data;
     },
   };
 })();

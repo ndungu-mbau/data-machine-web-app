@@ -22,6 +22,14 @@ export async function requestBackend(data, url) {
   });
 }
 
+export async function getBackend(url) {
+  return axios({
+    method: 'get',
+    url: `${apiUrl}${url}`,
+    // data: data,
+  });
+}
+
 export async function graphQuery(query, variables) {
   return axios({
     method: 'post',
